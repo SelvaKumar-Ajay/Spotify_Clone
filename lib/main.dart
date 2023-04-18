@@ -15,7 +15,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      title: 'Spotify Clone',
+      title: StringConstants.spotifyClone,
       theme: theme,
       home: const HomePage(),
     );
