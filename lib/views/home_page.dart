@@ -1,7 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:spotify/constants/constants.dart';
-import 'package:spotify/data%20screen/home_screen.dart';
+import 'package:spotify/data%20screen/datascreen.dart';
+import 'package:spotify/reusable_widgets/appbar.dart';
 import 'package:spotify/reusable_widgets/reusable_widgets.dart';
 
 class HomePage extends StatefulWidget {
@@ -23,6 +24,7 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: _page == 0 ? AppBarClass.homeScreenAppBar() : null,
       body: IndexedStack(index: _page, children: DataWidgets.dataWidgets),
       bottomNavigationBar: CupertinoTabBar(
         activeColor: whiteColor,

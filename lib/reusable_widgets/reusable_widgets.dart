@@ -6,7 +6,7 @@ BottomNavigationBarItem bottomNavigationBarItem(
   return BottomNavigationBarItem(
       icon: Image.asset(icon,
           height: 20.0,
-          width: 10.0,
+          width: 15.0,
           color: page == false ? greyColor.withOpacity(0.5) : whiteColor),
       label: label);
 }

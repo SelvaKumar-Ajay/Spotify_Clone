@@ -5,5 +5,25 @@ class IconConstants {
   static const String libraryIcon = '$_path/digital-library.png';
   static const String searchIcon = '$_path/search.png';
   static const String settingsIcon = '$_path/settings.png';
+  static const String addtoQueueIcon = '$_path/add to queue.png';
+  static const String viewArtistIcon = '$_path/artist.png';
+  static const String computerIcon = '$_path/devices.png';
   static const String thunderIcon = '$_path/thunder.png';
+  static const String viewAlbumIcon = '$_path/disc.png';
+  static const String reportIcon = '$_path/flag.png';
+  static const String likeIcon = '$_path/heart.png';
+  static const String loopIcon = '$_path/loop.png';
+  static const String microphoneIcon = '$_path/microphone.png';
+  static const String moreIcon = '$_path/more.png';
+  static const String addtoPlaylist = '$_path/music_plus.png';
+  static const String pauseIcon = '$_path/pause.png';
+  static const String nextTrcakIcon = '$_path/nex-track-button.png';
+  static const String playIcon = '$_path/play-button-arrowhead.png';
+  static const String playListIcon = '$_path/playlist.png';
+  static const String previousTrackIcon = '$_path/previous-track-button.png';
+  static const String shareIcon = '$_path/share.png';
+  static const String shuffleIcon = '$_path/shuffle.png';
+  static const String goToSongRadio = '$_path/signal.png';
+  static const String spotifyIcon = '$_path/spotify.png';
+  static const String showCreditsIcon = '$_path/user.png';
 }
