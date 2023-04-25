@@ -12,6 +12,32 @@ BottomNavigationBarItem bottomNavigationBarItem(
       label: label);
 }
 
+//Title Text
+Column titleText({required text}) {
+  return Column(
+    children: [
+      sizedBox(15, 0),
+      Text(
+        text,
+        style: const TextStyle(
+          color: whiteColor,
+          fontSize: 30.0,
+          fontWeight: FontWeight.bold,
+        ),
+      ),
+      sizedBox(25, 0),
+    ],
+  );
+}
+
+//CustomSizedBox
+SizedBox sizedBox(double height, double width) {
+  return SizedBox(
+    height: height,
+    width: width,
+  );
+}
+
 // Row of Recent Playlist
 Row rowRecentPlayList({
   required double height,

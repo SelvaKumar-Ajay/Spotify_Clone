@@ -8,7 +8,7 @@ class StringConstants {
   static const String goodEvening = "Good Evening";
   static const String spotifyClone = 'Spotify Clone';
   static const String likedSongs = "Liked Songs";
-  // static const String library = "Your Library";
+  static const String yourTopMixes = "Your top mixes";
   // static const String library = "Your Library";
   // static const String library = "Your Library";
   // static const String library = "Your Library";

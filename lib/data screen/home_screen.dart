@@ -30,9 +30,7 @@ class _HomeScreenState extends State<HomeScreen> {
               fontWeight: FontWeight.bold,
             ),
           ),
-          const SizedBox(
-            height: 20.0,
-          ),
+          sizedBox(20, 0),
           rowRecentPlayList(
             height: height,
             width: width,
@@ -41,9 +39,7 @@ class _HomeScreenState extends State<HomeScreen> {
             secondImage: IconConstants.likeIcon,
             secondText: StringConstants.likedSongs,
           ),
-          const SizedBox(
-            height: 10.0,
-          ),
+          sizedBox(10, 0),
           rowRecentPlayList(
             height: height,
             width: width,
@@ -52,9 +48,7 @@ class _HomeScreenState extends State<HomeScreen> {
             secondImage: IconConstants.microphoneIcon,
             secondText: StringConstants.goodMorning,
           ),
-          const SizedBox(
-            height: 10.0,
-          ),
+          sizedBox(10, 0),
           rowRecentPlayList(
             height: height,
             width: width,
@@ -63,6 +57,7 @@ class _HomeScreenState extends State<HomeScreen> {
             secondImage: IconConstants.loopIcon,
             secondText: StringConstants.search,
           ),
+          titleText(text: StringConstants.yourTopMixes)
         ],
       ),
     );
