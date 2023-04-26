@@ -12,6 +12,71 @@ BottomNavigationBarItem bottomNavigationBarItem(
       label: label);
 }
 
+//Your Top mixes template
+Container yourTopMixesPlaylist({
+  required double height,
+  required double width,
+  required Color color,
+  required String image,
+}) {
+  return Container(
+    decoration: BoxDecoration(
+        // color: blueColor,
+        border: Border(
+            bottom: BorderSide(
+                color: color,
+                width: YourtopMixes(height: height, width: width)
+                    .bottomBarWidth))),
+    margin: EdgeInsets.only(
+        right: YourtopMixes(height: height, width: width).rightMarginSize),
+    height: YourtopMixes(height: height, width: width).sizeOfContainer,
+    width: YourtopMixes(height: height, width: width).sizeOfContainer,
+    child: Stack(
+      children: [
+        Image.asset(image, color: color),
+        Padding(
+          padding: EdgeInsets.all(
+              YourtopMixes(height: height, width: width).paddingSize),
+          child: Align(
+            alignment: Alignment.topLeft,
+            // ignore: sized_box_for_whitespace
+            child: Container(
+              height:
+                  YourtopMixes(height: height, width: width).spotifyIconHeight,
+              width:
+                  YourtopMixes(height: height, width: width).spotifyIconWidth,
+              child: Image.asset(
+                IconConstants.spotifyIcon,
+                color: whiteColor,
+                fit: BoxFit.contain,
+              ),
+            ),
+          ),
+        ),
+        Padding(
+          padding: EdgeInsets.only(
+              bottom: YourtopMixes(height: height, width: width).bottomPadding),
+          child: Align(
+            alignment: Alignment.bottomLeft,
+            child: Container(
+              height: YourtopMixes(height: height, width: width)
+                  .bottomTextContainerHeight,
+              decoration: BoxDecoration(
+                  color: transparentColor,
+                  border: Border(
+                      left: BorderSide(
+                          color: color,
+                          width: YourtopMixes(height: height, width: width)
+                              .bottomtextContainerBorderWidth))),
+              child: const Text("  ${StringConstants.popMix}"),
+            ),
+          ),
+        )
+      ],
+    ),
+  );
+}
+
 //CustomSizedBox
 SizedBox sizedBox(double height, double width) {
   return SizedBox(
