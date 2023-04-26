@@ -12,24 +12,6 @@ BottomNavigationBarItem bottomNavigationBarItem(
       label: label);
 }
 
-//Title Text
-Column titleText({required text}) {
-  return Column(
-    children: [
-      sizedBox(15, 0),
-      Text(
-        text,
-        style: const TextStyle(
-          color: whiteColor,
-          fontSize: 30.0,
-          fontWeight: FontWeight.bold,
-        ),
-      ),
-      sizedBox(25, 0),
-    ],
-  );
-}
-
 //CustomSizedBox
 SizedBox sizedBox(double height, double width) {
   return SizedBox(
@@ -53,7 +35,8 @@ Row rowRecentPlayList({
       recentViewedPlaylist(
           height: height, width: width, img: firstImage, text: firstText),
       SizedBox(
-        width: ((width * 0.4) * 0.1) * 0.5,
+        width: RowRecentPlaylist(height: height, width: width)
+            .rowRecentPlaylistWidth,
       ),
       recentViewedPlaylist(
           height: height, width: width, img: secondImage, text: secondText)
@@ -68,28 +51,27 @@ Container recentViewedPlaylist({
   required String img,
   required String text,
 }) {
-  final double imgBoxWidth = (width * 0.4) * 0.4;
-  final double nonImgBoxWidth = (width * 0.4) * 0.7;
   return Container(
     decoration: BoxDecoration(
         color: searchBarColor.withOpacity(0.4),
         shape: BoxShape.rectangle,
         borderRadius: BorderRadius.circular(8.0)),
     clipBehavior: Clip.antiAlias,
-    height: height * 0.1,
-    width: ((width * 0.5) * 0.9) * 1.03,
+    height: RowRecentPlaylist(height: height, width: width).boxDecorationHeight,
+    width: RowRecentPlaylist(height: height, width: width).boxDecorationWidth,
     child: Row(children: [
       // ignore: sized_box_for_whitespace
       Container(
         height: height * 0.1,
-        width: imgBoxWidth,
+        width: RowRecentPlaylist(height: height, width: width).imgBoxWidth,
         child: Image.asset(img, fit: BoxFit.cover),
       ),
       SizedBox(width: (width * 0.2) * 0.1),
       Expanded(
         child: SizedBox(
-          height: height * 0.1,
-          width: nonImgBoxWidth,
+          height:
+              RowRecentPlaylist(height: height, width: width).containerHeight,
+          width: RowRecentPlaylist(height: height, width: width).nonImgBoxWidth,
           child: Align(
             alignment: Alignment.centerLeft,
             child: Text(text,
@@ -104,3 +86,16 @@ Container recentViewedPlaylist({
     ]),
   );
 }
+
+//Title Text
+Container titleText({required text}) => Container(
+      margin: const EdgeInsets.fromLTRB(0, 25.0, 0, 15.0),
+      child: Text(
+        text,
+        style: const TextStyle(
+          color: whiteColor,
+          fontSize: 30.0,
+          fontWeight: FontWeight.bold,
+        ),
+      ),
+    );

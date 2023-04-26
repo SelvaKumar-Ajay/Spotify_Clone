@@ -57,7 +57,65 @@ class _HomeScreenState extends State<HomeScreen> {
             secondImage: IconConstants.loopIcon,
             secondText: StringConstants.search,
           ),
-          titleText(text: StringConstants.yourTopMixes)
+          titleText(text: StringConstants.yourTopMixes),
+          Container(
+            decoration: BoxDecoration(
+                color: blueColor,
+                border: Border(
+                    bottom: BorderSide(
+                        color: redColor,
+                        width: YourtopMixes(height: height, width: width)
+                            .bottomBarWidth))),
+            margin: EdgeInsets.only(
+                right:
+                    YourtopMixes(height: height, width: width).rightMarginSize),
+            height: YourtopMixes(height: height, width: width).sizeOfContainer,
+            width: YourtopMixes(height: height, width: width).sizeOfContainer,
+            child: Stack(
+              children: [
+                Image.asset(IconConstants.shareIcon),
+                Padding(
+                  padding: EdgeInsets.all(
+                      YourtopMixes(height: height, width: width).paddingSize),
+                  child: Align(
+                    alignment: Alignment.topLeft,
+                    child: Container(
+                      height: YourtopMixes(height: height, width: width)
+                          .spotifyIconHeight,
+                      width: YourtopMixes(height: height, width: width)
+                          .spotifyIconWidth,
+                      child: Image.asset(
+                        IconConstants.spotifyIcon,
+                        color: whiteColor,
+                        fit: BoxFit.contain,
+                      ),
+                    ),
+                  ),
+                ),
+                Padding(
+                  padding: EdgeInsets.only(
+                      bottom: YourtopMixes(height: height, width: width)
+                          .bottomPadding),
+                  child: Align(
+                    alignment: Alignment.bottomLeft,
+                    child: Container(
+                      height: YourtopMixes(height: height, width: width)
+                          .bottomTextContainerHeight,
+                      decoration: BoxDecoration(
+                          color: transparentColor,
+                          border: Border(
+                              left: BorderSide(
+                                  color: redColor,
+                                  width:
+                                      YourtopMixes(height: height, width: width)
+                                          .bottomtextContainerBorderWidth))),
+                      child: Text("  ${StringConstants.popMix}"),
+                    ),
+                  ),
+                )
+              ],
+            ),
+          )
         ],
       ),
     );

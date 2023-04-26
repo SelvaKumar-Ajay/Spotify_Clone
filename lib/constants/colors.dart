@@ -6,3 +6,4 @@ const Color blueColor = Color.fromRGBO(29, 155, 240, 1);
 const Color whiteColor = Colors.white;
 const Color greyColor = Colors.grey;
 const Color redColor = Color.fromRGBO(249, 25, 127, 1);
+const Color transparentColor = Colors.transparent;
