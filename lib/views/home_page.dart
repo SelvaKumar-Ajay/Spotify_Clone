@@ -2,7 +2,6 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:spotify/constants/constants.dart';
 import 'package:spotify/data%20screen/datascreen.dart';
-import 'package:spotify/reusable_widgets/appbar.dart';
 import 'package:spotify/reusable_widgets/reusable_widgets.dart';
 
 class HomePage extends StatefulWidget {
