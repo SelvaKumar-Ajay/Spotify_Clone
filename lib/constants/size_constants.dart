@@ -1,3 +1,19 @@
+//NormalNormalPlaylistTemplateSizes
+class NormalPlaylistTemplateSizes extends YourtopMixSizes {
+  @override
+  // ignore: overridden_fields
+  double width;
+  @override
+  // ignore: overridden_fields
+  double height;
+  NormalPlaylistTemplateSizes({
+    required this.width,
+    required this.height,
+  }) : super(height: height, width: width);
+
+  late double normalPlaylistSizedBox = sBSizeTotalTopMix;
+}
+
 //Sizes of yourTopMixes or rowOfTopMixes in reusablewidgets.dart
 class YourtopMixSizes {
   double width;
@@ -20,7 +36,9 @@ class YourtopMixSizes {
   late double bottomPadding = sizeOfContainer * 0.06;
   late double textBoxHeight = sizeOfContainer * 0.25;
   late double containerTextSpace = sizeOfContainer * 0.1;
-  // late double yourMixContainer = width * 0.4;
+  //ListView builder Sized Box size (Total of Image Conatiner,Text and Space Between them)
+  late double sBSizeTotalTopMix =
+      sizeOfContainer + containerTextSpace + textBoxHeight;
 }
 
 //Sizes of RecentPlaylist or RowRecentPlaylist in reusablewidgets.dart

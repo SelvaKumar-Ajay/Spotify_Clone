@@ -10,7 +10,7 @@ class StringConstants {
   static const String likedSongs = "Liked Songs";
   static const String yourTopMixes = "Your top mixes";
   static const String popMix = 'Pop Mix';
-  // static const String library = "Your Library";
+  static const String indiasBest = "India's Best";
   // static const String library = "Your Library";
   // static const String library = "Your Library";
   // static const String library = "Your Library";

@@ -26,7 +26,6 @@ class _HomeScreenState extends State<HomeScreen> {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           titleText(text: dateTimeGreeting(), width: width),
-
           rowRecentPlayList(
             height: height,
             width: width,
@@ -35,7 +34,7 @@ class _HomeScreenState extends State<HomeScreen> {
             secondImage: IconConstants.likeIcon,
             secondText: StringConstants.likedSongs,
           ),
-          sizedBox(10, 0),
+          sizedBox(height * 0.01, 0),
           rowRecentPlayList(
             height: height,
             width: width,
@@ -44,7 +43,7 @@ class _HomeScreenState extends State<HomeScreen> {
             secondImage: IconConstants.microphoneIcon,
             secondText: StringConstants.goodMorning,
           ),
-          sizedBox(10, 0),
+          sizedBox(height * 0.01, 0),
           rowRecentPlayList(
             height: height,
             width: width,
@@ -54,29 +53,15 @@ class _HomeScreenState extends State<HomeScreen> {
             secondText: StringConstants.search,
           ),
           titleText(text: StringConstants.yourTopMixes, width: width),
-          SizedBox(
-            height: height * 0.4,
-            child: ListView.builder(
-              scrollDirection: Axis.horizontal,
-              itemCount: yourtopMixDataList.length,
-              itemBuilder: (context, index) {
-                return yourTopMixesTemplate(
-                    height: height,
-                    width: width,
-                    color: yourtopMixDataList[index].color,
-                    image: yourtopMixDataList[index].image,
-                    text: yourtopMixDataList[index].text,
-                    description: yourtopMixDataList[index].description);
-              },
-            ),
-          ),
-
-          // yourTopMixesTemplate(
-          //     height: height,
-          //     width: width,
-          //     color: yourtopMixDataList[index].color,
-          //     image: yourtopMixDataList[index].image,
-          //     text: yourtopMixDataList[index].text);
+          StackedRowofPlaylist(
+              width: width,
+              height: height,
+              yourtopMixDataList: yourtopMixDataList),
+          titleText(text: StringConstants.indiasBest, width: width),
+          NormalPlaylistTemplate(
+              width: width,
+              height: height,
+              yourtopMixDataList: yourtopMixDataList)
         ],
       ),
     );
