@@ -21,7 +21,7 @@ class _HomeScreenState extends State<HomeScreen> {
         TopMixData().yourTopMixesData();
 
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 10.0, vertical: 10.0),
+      padding: const EdgeInsets.fromLTRB(10.0, 10.0, 0, 10.0),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -53,7 +53,7 @@ class _HomeScreenState extends State<HomeScreen> {
             secondText: StringConstants.search,
           ),
           titleText(text: StringConstants.yourTopMixes, width: width),
-          StackedRowofPlaylist(
+          StackedPlaylistTemplate(
               width: width,
               height: height,
               yourtopMixDataList: yourtopMixDataList),
@@ -61,7 +61,27 @@ class _HomeScreenState extends State<HomeScreen> {
           NormalPlaylistTemplate(
               width: width,
               height: height,
-              yourtopMixDataList: yourtopMixDataList)
+              yourtopMixDataList: yourtopMixDataList),
+          titleText(text: StringConstants.episForYou, width: width),
+          NormalTitleTemplate(
+            width: width,
+            height: height,
+            yourtopMixDataList: yourtopMixDataList,
+          ),
+          titleText(text: StringConstants.recentPlayed, width: width),
+          TitleOnlyTemplate(
+              width: width,
+              height: height,
+              yourtopMixDataList: yourtopMixDataList),
+          NamedPlaylistTemplate(
+              width: width,
+              height: height,
+              yourtopMixDataList: yourtopMixDataList),
+          titleText(text: StringConstants.yourFavArtist, width: width),
+          ArtistsTemplate(
+              width: width,
+              height: height,
+              yourtopMixDataList: yourtopMixDataList),
         ],
       ),
     );

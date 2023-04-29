@@ -11,10 +11,10 @@ class StringConstants {
   static const String yourTopMixes = "Your top mixes";
   static const String popMix = 'Pop Mix';
   static const String indiasBest = "India's Best";
-  // static const String library = "Your Library";
-  // static const String library = "Your Library";
-  // static const String library = "Your Library";
-  // static const String library = "Your Library";
+  static const String episForYou = "Episodes for you";
+  static const String recentPlayed = "Recently played";
+  static const String moreLike = "MORE LIKE";
+  static const String yourFavArtist = "Your favourite artists";
   // static const String library = "Your Library";
   // static const String library = "Your Library";
   // static const String library = "Your Library";

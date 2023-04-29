@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:spotify/constants/constants.dart';
 
 // Row of Recent Playlist
-Row rowRecentPlayList({
+Padding rowRecentPlayList({
   required double height,
   required double width,
   required String firstImage,
@@ -10,18 +10,20 @@ Row rowRecentPlayList({
   required String firstText,
   required String secondText,
 }) {
-  return Row(
-    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-    children: [
-      recentViewedPlaylist(
-          height: height, width: width, img: firstImage, text: firstText),
-      SizedBox(
-        width: RowRecentPlaylist(height: height, width: width)
-            .rowRecentPlaylistWidth,
-      ),
-      recentViewedPlaylist(
-          height: height, width: width, img: secondImage, text: secondText)
-    ],
+  return Padding(
+    padding: const EdgeInsets.only(right: 10.0),
+    child: Row(
+      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+      children: [
+        recentViewedPlaylist(
+            height: height, width: width, img: firstImage, text: firstText),
+        SizedBox(
+          width: height * 0.01,
+        ),
+        recentViewedPlaylist(
+            height: height, width: width, img: secondImage, text: secondText)
+      ],
+    ),
   );
 }
 
@@ -47,7 +49,9 @@ Container recentViewedPlaylist({
         width: RowRecentPlaylist(height: height, width: width).imgBoxWidth,
         child: Image.asset(img, fit: BoxFit.cover),
       ),
-      SizedBox(width: (width * 0.2) * 0.1),
+      SizedBox(
+          width: RowRecentPlaylist(height: height, width: width)
+              .spaceSizedBoxWidth),
       Expanded(
         child: SizedBox(
           height:
