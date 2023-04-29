@@ -17,9 +17,9 @@ Padding rowRecentPlayList({
       children: [
         recentViewedPlaylist(
             height: height, width: width, img: firstImage, text: firstText),
-        SizedBox(
-          width: height * 0.01,
-        ),
+        // SizedBox(
+        //   width: width * 0.01,
+        // ),
         recentViewedPlaylist(
             height: height, width: width, img: secondImage, text: secondText)
       ],
