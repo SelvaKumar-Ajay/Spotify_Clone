@@ -11,7 +11,7 @@ Padding rowRecentPlayList({
   required String secondText,
 }) {
   return Padding(
-    padding: const EdgeInsets.only(right: 10.0),
+    padding: EdgeInsets.only(right: width * 0.01),
     child: Row(
       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
       children: [
@@ -38,7 +38,7 @@ Container recentViewedPlaylist({
     decoration: BoxDecoration(
         color: searchBarColor.withOpacity(0.4),
         shape: BoxShape.rectangle,
-        borderRadius: BorderRadius.circular(8.0)),
+        borderRadius: BorderRadius.circular(4.0)),
     clipBehavior: Clip.antiAlias,
     height: RowRecentPlaylist(height: height, width: width).boxDecorationHeight,
     width: RowRecentPlaylist(height: height, width: width).boxDecorationWidth,
