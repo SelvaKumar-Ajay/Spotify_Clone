@@ -2,24 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:spotify/constants/constants.dart';
 import 'package:spotify/data/data.dart';
 import 'reusable_widgets.dart';
-export 'appbar.dart';
 export 'home_screen_widgets.dart';
 export 'normal_playlist_template.dart';
 export 'stacked_playlist_template.dart';
 export 'normal_title_template.dart';
 export 'title_only_template.dart';
 export 'artists_template.dart';
-
-//BottomNavigationBar Item
-BottomNavigationBarItem bottomNavigationBarItem(
-    {required String icon, required String label, bool? page}) {
-  return BottomNavigationBarItem(
-      icon: Image.asset(icon,
-          height: 20.0,
-          width: 20.0,
-          color: page == false ? greyColor.withOpacity(0.5) : whiteColor),
-      label: label);
-}
 
 //CustomSizedBox
 SizedBox sizedBox(double height, double width) {

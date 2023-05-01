@@ -2,7 +2,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:spotify/constants/constants.dart';
 import 'package:spotify/data%20screen/datascreen.dart';
-import 'package:spotify/reusable_widgets/reusable_widgets.dart';
+import 'package:spotify/reusable_widgets/appbar.dart';
+import 'package:spotify/reusable_widgets/bottom_nav_bar.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});

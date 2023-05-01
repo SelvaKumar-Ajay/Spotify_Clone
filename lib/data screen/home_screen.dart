@@ -2,8 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:spotify/constants/constants.dart';
 import 'package:spotify/data/data.dart';
 import 'package:spotify/functions/functions.dart';
-import 'package:spotify/reusable_widgets/reusable_widgets.dart';
-// import 'package:spotify/reusable_widgets/reusable_widgets.dart';
+import 'package:spotify/reusable_widgets/home/reusable_widgets.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
