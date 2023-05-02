@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:spotify/views/home_page.dart';
+import 'package:spotify/home_page.dart';
 
 import 'constants/constants.dart';
 

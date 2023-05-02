@@ -8,3 +8,4 @@ const Color greyColor = Colors.grey;
 const Color redColor = Color.fromRGBO(249, 25, 127, 1);
 const Color transparentColor = Colors.transparent;
 const Color yellowColor = Colors.yellow;
+const Color blackColor = Colors.black;

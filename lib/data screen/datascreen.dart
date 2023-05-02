@@ -1,15 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:spotify/constants/constants.dart';
-import 'package:spotify/data%20screen/home_screen.dart';
+import 'package:spotify/view/home_screen.dart';
+import 'package:spotify/view/search.dart';
 
 class DataWidgets {
   final String dateTime;
   static List<Widget> dataWidgets = [
     const HomeScreen(),
-    Center(
-      child: Image.asset(IconConstants.searchIcon,
-          color: whiteColor, height: 30.0),
-    ),
+    const SearchScreen(),
     Center(
       child: Image.asset(IconConstants.libraryIcon,
           color: whiteColor, height: 30.0),

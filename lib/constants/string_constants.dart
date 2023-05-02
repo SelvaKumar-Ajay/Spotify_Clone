@@ -15,8 +15,7 @@ class StringConstants {
   static const String recentPlayed = "Recently played";
   static const String moreLike = "MORE LIKE";
   static const String yourFavArtist = "Your favourite artists";
-  // static const String library = "Your Library";
-  // static const String library = "Your Library";
+  static const String serachButtonText = "Artists, songs, or podcasts";
   // static const String library = "Your Library";
   // static const String library = "Your Library";
   // static const String library = "Your Library";
