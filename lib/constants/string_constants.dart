@@ -1,4 +1,5 @@
 class StringConstants {
+  // Home tab String Constants
   static const String home = "Home";
   static const String search = "Search";
   static const String library = "Your Library";
@@ -15,9 +16,11 @@ class StringConstants {
   static const String recentPlayed = "Recently played";
   static const String moreLike = "MORE LIKE";
   static const String yourFavArtist = "Your favourite artists";
+
+  //Search tab String Constants
   static const String serachButtonText = "Artists, songs, or podcasts";
-  // static const String library = "Your Library";
-  // static const String library = "Your Library";
+  static const String searchHeader = "Search";
+  static const String browseAll = "Browse all";
   // static const String library = "Your Library";
   // static const String library = "Your Library";
   // static const String library = "Your Library";
