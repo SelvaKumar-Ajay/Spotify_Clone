@@ -25,8 +25,10 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: _page == 0 ? AppBarClass.homeScreenAppBar() : null,
-      body: SingleChildScrollView(
-          child: IndexedStack(index: _page, children: DataWidgets.dataWidgets)),
+      body: IndexedStack(
+          alignment: Alignment.bottomCenter,
+          index: _page,
+          children: DataWidgets.dataWidgets),
       bottomNavigationBar: CupertinoTabBar(
         activeColor: whiteColor,
         onTap: onBottomTab,

@@ -35,6 +35,9 @@ dependencies:
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^1.0.2
+  # audioplayers: ^0.13.2
+  audioplayers: ^4.0.1
+  marquee: ^2.0.4
 
 dev_dependencies:
   flutter_test:
@@ -64,6 +67,7 @@ flutter:
     - lib/icons/1.5x/
     - lib/icons/2.0x/
     - lib/icons/3.0x/
+    - lib/musics/
 
   #   - images/a_dot_ham.jpeg
 

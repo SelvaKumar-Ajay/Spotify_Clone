@@ -14,5 +14,5 @@ const Color brownColor = Colors.brown;
 const Color cyanColor = Colors.cyan;
 const Color pinkColor = Colors.pink;
 const Color purpleColor = Colors.purple;
-const Color deepPurpleAccentColor = Colors.deepPurpleAccent;
+const Color deepPurpleAccentColor = Color.fromARGB(255, 43, 28, 255);
 const Color lightGreenColor = Colors.lightGreen;
