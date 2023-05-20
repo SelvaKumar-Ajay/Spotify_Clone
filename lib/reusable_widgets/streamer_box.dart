@@ -16,62 +16,76 @@ class StreamerBox extends StatefulWidget {
 }
 
 class _StreamerBoxState extends State<StreamerBox> {
-  Duration position = Duration.zero;
-  bool isPlaying = false;
-  final audioPlayer = AssetsAudioPlayer();
+  Duration _duration = Duration.zero;
+  bool _isPlaying = false;
+  bool _isPaused = false;
+  double _sliderValue = 0.0;
+  AssetsAudioPlayer _audioPlayer = AssetsAudioPlayer();
+
   final audioPath1 = "lib/musics/Vaseegara.mp3";
   final audioPath2 = "lib/musics/PathuThala.mp3";
   final audioPath3 = "lib/musics/Arabu-Naade.mp3";
-  // final audioPathSize = "lib/musics/Arabu-Naade.mp3";
 
   // AudioPlayer player = AudioPlayer();
-  // Duration duration = Duration(seconds: 90);
+  // Duration _duration = Duration(seconds: 90);
 
-  // @override
-  // void initState() {
-  //   super.initState();
-  //   _initAudioPlayer();
-  // }
+  @override
+  void initState() {
+    super.initState();
+    _audioPlayer = AssetsAudioPlayer();
+    _audioPlayer.current.listen((value) {
+      setState(() {
+        _sliderValue = value!.audio.duration.inSeconds.toDouble();
+        _duration = value.audio.duration;
+      });
+    });
+  }
 
-  // void _initAudioPlayer() {
-  //   player = AudioPlayer();
-  //   player.onDurationChanged.listen((dura) {
-  //     setState(() {
-  //       duration = dura;
-  //     });
-  //   });
-  //   player.onPositionChanged.listen((p) {
-  //     setState(() {
-  //       position = p;
-  //     });
-  //   });
-  // }
+  void openAudio() {
+    _audioPlayer.open(Audio(audioPath1));
+  }
 
-  // void play() async {
-  //   await player.play(AssetSource('lib/musics/Vaseegara.mp3'));
-  //   setState(() {
-  //     isPlaying = true;
-  //   });
-  // }
+  void togglePlayer() {
+    if (_isPlaying) {
+      _audioPlayer.play();
+      setState(() {
+        _isPaused = true;
+        _isPlaying = false;
+      });
+    } else if (_isPaused) {
+      _audioPlayer.pause();
+      setState(() {
+        _isPaused = false;
+        _isPlaying = true;
+      });
+    } else {
+      openAudio();
+      setState(() {
+        _isPaused = true;
+      });
+    }
+  }
 
-  // void pause() async {
-  //   await player.pause();
-  //   setState(() {
-  //     isPlaying = false;
-  //   });
-  // }
+  void _onSliderChanged(double value) {
+    setState(() {
+      _sliderValue = value;
+      _audioPlayer.seek(Duration(seconds: value.toInt()));
+    });
+  }
 
-  // @override
-  // void dispose() {
-  //   player.dispose();
-  //   super.dispose();
-  // }
+  @override
+  void dispose() {
+    _audioPlayer.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
     // debugPrint("Streamer Box");
     double width = MediaQuery.of(context).size.width;
     double height = MediaQuery.of(context).size.height;
+    // final currentAudio = _audioPlayer.current;
+
     return Column(children: [
       //Streamer box
       Container(
@@ -153,12 +167,10 @@ class _StreamerBoxState extends State<StreamerBox> {
                 ),
               ),
               IconButton(
-                  onPressed: () {
-                    setState(() {
-                      audioPlayer.open(Audio(audioPath1));
-                    });
-                  },
-                  icon: const Icon(Icons.pause))
+                  onPressed: togglePlayer,
+                  icon: _isPaused
+                      ? const Icon(Icons.pause)
+                      : const Icon(Icons.play_arrow)),
             ],
           ),
         ),
@@ -183,17 +195,12 @@ class _StreamerBoxState extends State<StreamerBox> {
                   activeColor: whiteColor,
                   inactiveColor: greyColor,
                   min: 0,
-                  max: 100,
-                  value: position.inSeconds.toDouble(),
-                  onChanged: (value) {
-                    // player.seek(Duration(seconds: value.toInt()));
-                    setState(() {
-                      position = Duration(seconds: value.toInt());
-                    });
-                  }),
+                  max: _duration.inSeconds.toDouble(),
+                  value: _sliderValue,
+                  onChanged: _onSliderChanged),
             ),
           ),
-          // Text('${duration.inSeconds}'),
+          // Text('${_duration.inSeconds}'),
         ],
       )
     ]);
