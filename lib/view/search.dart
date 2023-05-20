@@ -1,5 +1,4 @@
 // import 'package:audioplayers/audioplayers.dart';
-import 'package:audioplayers/audioplayers.dart';
 import 'package:flutter/material.dart';
 import 'package:spotify/constants/constants.dart';
 import 'package:spotify/data/search/cards.dart';
@@ -27,48 +26,6 @@ class SearchScreen extends StatefulWidget {
 
 class _SearchScreenState extends State<SearchScreen> {
   List<SearchTabCards> searchTabData = SearchTabDataCards().serachTabData;
-  AudioPlayer player = AudioPlayer();
-  // Duration duration = Duration(seconds: 90);
-
-  // @override
-  // void initState() {
-  //   super.initState();
-  //   _initAudioPlayer();
-  // }
-
-  // void _initAudioPlayer() {
-  //   player = AudioPlayer();
-  //   player.onDurationChanged.listen((dura) {
-  //     setState(() {
-  //       duration = dura;
-  //     });
-  //   });
-  //   player.onPositionChanged.listen((p) {
-  //     setState(() {
-  //       position = p;
-  //     });
-  //   });
-  // }
-
-  // void play() async {
-  //   await player.play(AssetSource('lib/musics/Vaseegara.mp3'));
-  //   setState(() {
-  //     isPlaying = true;
-  //   });
-  // }
-
-  // void pause() async {
-  //   await player.pause();
-  //   setState(() {
-  //     isPlaying = false;
-  //   });
-  // }
-
-  // @override
-  // void dispose() {
-  //   player.dispose();
-  //   super.dispose();
-  // }
 
   @override
   Widget build(BuildContext context) {

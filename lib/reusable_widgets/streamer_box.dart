@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:marquee/marquee.dart';
-
+import 'package:assets_audio_player/assets_audio_player.dart';
+// import 'package:audioplayers_web/audioplayers_web.dart';
 import '../constants/constants.dart';
 
 class StreamerBox extends StatefulWidget {
@@ -17,6 +18,54 @@ class StreamerBox extends StatefulWidget {
 class _StreamerBoxState extends State<StreamerBox> {
   Duration position = Duration.zero;
   bool isPlaying = false;
+  final audioPlayer = AssetsAudioPlayer();
+  final audioPath1 = "lib/musics/Vaseegara.mp3";
+  final audioPath2 = "lib/musics/PathuThala.mp3";
+  final audioPath3 = "lib/musics/Arabu-Naade.mp3";
+  // final audioPathSize = "lib/musics/Arabu-Naade.mp3";
+
+  // AudioPlayer player = AudioPlayer();
+  // Duration duration = Duration(seconds: 90);
+
+  // @override
+  // void initState() {
+  //   super.initState();
+  //   _initAudioPlayer();
+  // }
+
+  // void _initAudioPlayer() {
+  //   player = AudioPlayer();
+  //   player.onDurationChanged.listen((dura) {
+  //     setState(() {
+  //       duration = dura;
+  //     });
+  //   });
+  //   player.onPositionChanged.listen((p) {
+  //     setState(() {
+  //       position = p;
+  //     });
+  //   });
+  // }
+
+  // void play() async {
+  //   await player.play(AssetSource('lib/musics/Vaseegara.mp3'));
+  //   setState(() {
+  //     isPlaying = true;
+  //   });
+  // }
+
+  // void pause() async {
+  //   await player.pause();
+  //   setState(() {
+  //     isPlaying = false;
+  //   });
+  // }
+
+  // @override
+  // void dispose() {
+  //   player.dispose();
+  //   super.dispose();
+  // }
 
   @override
   Widget build(BuildContext context) {
@@ -103,7 +152,13 @@ class _StreamerBoxState extends State<StreamerBox> {
                   color: whiteColor,
                 ),
               ),
-              IconButton(onPressed: () {}, icon: const Icon(Icons.pause))
+              IconButton(
+                  onPressed: () {
+                    setState(() {
+                      audioPlayer.open(Audio(audioPath1));
+                    });
+                  },
+                  icon: const Icon(Icons.pause))
             ],
           ),
         ),
