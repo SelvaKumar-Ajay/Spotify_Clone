@@ -26,6 +26,9 @@ class SearchScreen extends StatefulWidget {
 
 class _SearchScreenState extends State<SearchScreen> {
   List<SearchTabCards> searchTabData = SearchTabDataCards().serachTabData;
+  final audioPath1 = "lib/musics/Vaseegara.mp3";
+  final audioPath2 = "lib/musics/PathuThala.mp3";
+  final audioPath3 = "lib/musics/Arabu-Naade.mp3";
 
   @override
   Widget build(BuildContext context) {
@@ -145,13 +148,19 @@ class _SearchScreenState extends State<SearchScreen> {
           ],
         ),
       ),
-      const Positioned(
-          bottom: 0,
-          right: 0,
-          left: 0,
-          child: StreamerBox(
-            title: "Title of Song with rock lee",
-          ))
+      Positioned(
+        bottom: 0,
+        right: 0,
+        left: 0,
+        child: StreamerBox(
+          title: "Title of Song with rock lee",
+          artist: 'Naruto',
+          audioPath: audioPath1,
+          image:
+              "https://images.unsplash.com/photo-1548142813-c348350df52b?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MTR8fHNtaWxlfGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=500&q=60",
+          boxColor: Colors.blue,
+        ),
+      ),
     ]);
   }
 }

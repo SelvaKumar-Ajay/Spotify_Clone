@@ -6,9 +6,18 @@ import '../constants/constants.dart';
 
 class StreamerBox extends StatefulWidget {
   final String title;
+  final String artist;
+  final String image;
+  final Color boxColor;
+  final String audioPath;
+
   const StreamerBox({
     Key? key,
     required this.title,
+    required this.artist,
+    required this.image,
+    required this.boxColor,
+    required this.audioPath,
   }) : super(key: key);
 
   @override
@@ -22,10 +31,6 @@ class _StreamerBoxState extends State<StreamerBox> {
   double _sliderValue = 0.0;
   AssetsAudioPlayer _audioPlayer = AssetsAudioPlayer();
 
-  final audioPath1 = "lib/musics/Vaseegara.mp3";
-  final audioPath2 = "lib/musics/PathuThala.mp3";
-  final audioPath3 = "lib/musics/Arabu-Naade.mp3";
-
   // AudioPlayer player = AudioPlayer();
   // Duration _duration = Duration(seconds: 90);
 
@@ -33,16 +38,25 @@ class _StreamerBoxState extends State<StreamerBox> {
   void initState() {
     super.initState();
     _audioPlayer = AssetsAudioPlayer();
+
+    _audioPlayer.currentPosition.listen((event) {
+      setState(() {
+        _sliderValue = event.inSeconds.toDouble();
+      });
+      // debugPrint('cp $_sliderValue');
+    });
     _audioPlayer.current.listen((value) {
       setState(() {
-        _sliderValue = value!.audio.duration.inSeconds.toDouble();
-        _duration = value.audio.duration;
+        // _sliderValue = value!.audio.duration.inSeconds.toDouble();
+        // debugPrint('$_sliderValue');
+        _duration = value!.audio.duration;
+        // debugPrint('$_duration');
       });
     });
   }
 
   void openAudio() {
-    _audioPlayer.open(Audio(audioPath1));
+    _audioPlayer.open(Audio(widget.audioPath));
   }
 
   void togglePlayer() {
@@ -67,9 +81,9 @@ class _StreamerBoxState extends State<StreamerBox> {
   }
 
   void _onSliderChanged(double value) {
+    _audioPlayer.seek(Duration(seconds: value.toInt()));
     setState(() {
       _sliderValue = value;
-      _audioPlayer.seek(Duration(seconds: value.toInt()));
     });
   }
 
@@ -89,7 +103,7 @@ class _StreamerBoxState extends State<StreamerBox> {
     return Column(children: [
       //Streamer box
       Container(
-        color: redColor,
+        color: widget.boxColor,
         height: StreamerBoxSizes(height: height, width: width).container,
         child: Padding(
           padding: EdgeInsets.all(
@@ -103,7 +117,7 @@ class _StreamerBoxState extends State<StreamerBox> {
                   borderRadius: BorderRadius.circular(8.0),
                 ),
                 child: Image.network(
-                  "https://images.unsplash.com/photo-1548142813-c348350df52b?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MTR8fHNtaWxlfGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=500&q=60",
+                  widget.image,
                   height: StreamerBoxSizes(height: height, width: width).imgHW,
                   width: StreamerBoxSizes(height: height, width: width).imgHW,
                   fit: BoxFit.cover,
@@ -148,7 +162,7 @@ class _StreamerBoxState extends State<StreamerBox> {
                             ),
                     ),
                     Text(
-                      "desc of Song",
+                      widget.artist,
                       style: TextStyle(
                         color: whiteColor.withOpacity(0.5),
                         fontSize: 11.0,
@@ -193,7 +207,7 @@ class _StreamerBoxState extends State<StreamerBox> {
               ),
               child: Slider(
                   activeColor: whiteColor,
-                  inactiveColor: greyColor,
+                  inactiveColor: widget.boxColor.withOpacity(0.8),
                   min: 0,
                   max: _duration.inSeconds.toDouble(),
                   value: _sliderValue,

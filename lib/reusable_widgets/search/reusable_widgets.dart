@@ -44,8 +44,8 @@ Container cards({
           alignment: Alignment.bottomRight,
           child: Transform.rotate(
             // alignment: Alignment.center,
-            angle: 90,
-            origin: const Offset(10, 13),
+            angle: 30 * 0.0174533,
+            origin: const Offset(0, 50),
             child: Container(
               clipBehavior: Clip.antiAlias,
               decoration:
