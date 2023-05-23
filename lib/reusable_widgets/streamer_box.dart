@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:marquee/marquee.dart';
 import 'package:assets_audio_player/assets_audio_player.dart';
+import 'package:spotify/view/song_screen.dart';
 // import 'package:audioplayers_web/audioplayers_web.dart';
 import '../constants/constants.dart';
 
@@ -100,123 +101,135 @@ class _StreamerBoxState extends State<StreamerBox> {
     double height = MediaQuery.of(context).size.height;
     // final currentAudio = _audioPlayer.current;
 
-    return Column(children: [
-      //Streamer box
-      Container(
-        color: widget.boxColor,
-        height: StreamerBoxSizes(height: height, width: width).container,
-        child: Padding(
-          padding: EdgeInsets.all(
-              StreamerBoxSizes(height: height, width: width).padding),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceAround,
-            children: [
-              Container(
-                clipBehavior: Clip.antiAlias,
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(8.0),
-                ),
-                child: Image.network(
-                  widget.image,
-                  height: StreamerBoxSizes(height: height, width: width).imgHW,
-                  width: StreamerBoxSizes(height: height, width: width).imgHW,
-                  fit: BoxFit.cover,
-                ),
-              ),
-              SizedBox(
-                width:
-                    StreamerBoxSizes(height: height, width: width).textSizedBox,
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    SizedBox(
-                      height: StreamerBoxSizes(height: height, width: width)
-                          .textAnimationHeight,
-                      child: widget.title.length > 30
-                          ? Marquee(
-                              text: widget.title,
-                              blankSpace: 10.0,
-                              velocity: 60.0,
-                              pauseAfterRound: const Duration(seconds: 2),
-                              startPadding: 5.0,
-
-                              // fadingEdgeStartFraction: 5.0,
-                              // fadingEdgeEndFraction: 5.0,
-                              accelerationCurve: Curves.easeInOut,
-                              decelerationCurve: Curves.easeInOut,
-                              // accelerationDuration: const Duration(seconds: 1),
-                              // accelerationCurve: Curves.linear,
-                              // decelerationDuration: const Duration(milliseconds: 500),
-                              style: const TextStyle(
-                                color: whiteColor,
-                                fontSize: 13.0,
-                              ),
-                            )
-                          : Text(
-                              widget.title,
-                              style: const TextStyle(
-                                color: whiteColor,
-                                fontSize: 13.0,
-                              ),
-                            ),
-                    ),
-                    Text(
-                      widget.artist,
-                      style: TextStyle(
-                        color: whiteColor.withOpacity(0.5),
-                        fontSize: 11.0,
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-              IconButton(
-                onPressed: () {},
-                icon: Image.asset(
-                  IconConstants.likeIcon,
-                  width: StreamerBoxSizes(height: height, width: width).iconHW,
-                  height: StreamerBoxSizes(height: height, width: width).iconHW,
-                  color: whiteColor,
-                ),
-              ),
-              IconButton(
-                  onPressed: togglePlayer,
-                  icon: _isPaused
-                      ? const Icon(Icons.pause)
-                      : const Icon(Icons.play_arrow)),
-            ],
+    return GestureDetector(
+      onTap: () {
+        Navigator.of(context).push(
+          MaterialPageRoute(
+            builder: (context) => const AudioPlayerScreen(),
           ),
-        ),
-      ),
-      //Slider
-      Row(
-        children: [
-          // Text('${position.inSeconds}'),
-          Expanded(
-            child: SliderTheme(
-              data: SliderTheme.of(context).copyWith(
-                trackHeight: 2.0,
-                thumbShape: const RoundSliderThumbShape(
-                  enabledThumbRadius: 0.0,
+        );
+      },
+      child: Column(children: [
+        //Streamer box
+        Container(
+          color: widget.boxColor,
+          height: StreamerBoxSizes(height: height, width: width).container,
+          child: Padding(
+            padding: EdgeInsets.all(
+                StreamerBoxSizes(height: height, width: width).padding),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
+              children: [
+                Container(
+                  clipBehavior: Clip.antiAlias,
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(8.0),
+                  ),
+                  child: Image.network(
+                    widget.image,
+                    height:
+                        StreamerBoxSizes(height: height, width: width).imgHW,
+                    width: StreamerBoxSizes(height: height, width: width).imgHW,
+                    fit: BoxFit.cover,
+                  ),
                 ),
-                thumbColor: transparentColor,
-                overlayShape: const RoundSliderOverlayShape(
-                  overlayRadius: 0.0,
+                SizedBox(
+                  width: StreamerBoxSizes(height: height, width: width)
+                      .textSizedBox,
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      SizedBox(
+                        height: StreamerBoxSizes(height: height, width: width)
+                            .textAnimationHeight,
+                        child: widget.title.length > 30
+                            ? Marquee(
+                                text: widget.title,
+                                blankSpace: 10.0,
+                                velocity: 60.0,
+                                pauseAfterRound: const Duration(seconds: 2),
+                                startPadding: 5.0,
+
+                                // fadingEdgeStartFraction: 5.0,
+                                // fadingEdgeEndFraction: 5.0,
+                                accelerationCurve: Curves.easeInOut,
+                                decelerationCurve: Curves.easeInOut,
+                                // accelerationDuration: const Duration(seconds: 1),
+                                // accelerationCurve: Curves.linear,
+                                // decelerationDuration: const Duration(milliseconds: 500),
+                                style: const TextStyle(
+                                  color: whiteColor,
+                                  fontSize: 13.0,
+                                ),
+                              )
+                            : Text(
+                                widget.title,
+                                style: const TextStyle(
+                                  color: whiteColor,
+                                  fontSize: 13.0,
+                                ),
+                              ),
+                      ),
+                      Text(
+                        widget.artist,
+                        style: TextStyle(
+                          color: whiteColor.withOpacity(0.5),
+                          fontSize: 11.0,
+                        ),
+                      ),
+                    ],
+                  ),
                 ),
-              ),
-              child: Slider(
-                  activeColor: whiteColor,
-                  inactiveColor: widget.boxColor.withOpacity(0.8),
-                  min: 0,
-                  max: _duration.inSeconds.toDouble(),
-                  value: _sliderValue,
-                  onChanged: _onSliderChanged),
+                IconButton(
+                  onPressed: () {},
+                  icon: Image.asset(
+                    IconConstants.likeIcon,
+                    width:
+                        StreamerBoxSizes(height: height, width: width).iconHW,
+                    height:
+                        StreamerBoxSizes(height: height, width: width).iconHW,
+                    color: whiteColor,
+                  ),
+                ),
+                IconButton(
+                    onPressed: togglePlayer,
+                    icon: _isPaused
+                        ? const Icon(Icons.pause)
+                        : const Icon(Icons.play_arrow)),
+              ],
             ),
           ),
-          // Text('${_duration.inSeconds}'),
-        ],
-      )
-    ]);
+        ),
+        //Slider
+        Row(
+          children: [
+            // Text('${position.inSeconds}'),
+            Expanded(
+              child: SliderTheme(
+                data: SliderTheme.of(context).copyWith(
+                  trackHeight: 2.0,
+                  thumbShape: const RoundSliderThumbShape(
+                    enabledThumbRadius: 0.0,
+                  ),
+                  thumbColor: transparentColor,
+                  overlayShape: const RoundSliderOverlayShape(
+                    overlayRadius: 0.0,
+                  ),
+                ),
+                child: Slider(
+                    activeColor: whiteColor,
+                    inactiveColor: widget.boxColor.withOpacity(0.8),
+                    min: 0,
+                    max: _duration.inSeconds.toDouble(),
+                    value: _sliderValue,
+                    onChanged: _onSliderChanged),
+              ),
+            ),
+            // Text('${_duration.inSeconds}'),
+          ],
+        )
+      ]),
+    );
   }
 }

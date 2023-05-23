@@ -153,22 +153,13 @@ class _SearchScreenState extends State<SearchScreen> {
         bottom: 0,
         right: 0,
         left: 0,
-        child: GestureDetector(
-          onTap: () {
-            // Navigator.of(context).push(
-            //   MaterialPageRoute(
-            //     builder: (context) => const AudioPlayerScreen(),
-            //   ),
-            // );
-          },
-          child: StreamerBox(
-            title: "Title of Song with rock lee",
-            artist: 'Naruto',
-            audioPath: audioPath1,
-            image:
-                "https://images.unsplash.com/photo-1548142813-c348350df52b?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MTR8fHNtaWxlfGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=500&q=60",
-            boxColor: Colors.blue,
-          ),
+        child: StreamerBox(
+          title: "Title of Song with rock lee",
+          artist: 'Naruto',
+          audioPath: audioPath1,
+          image:
+              "https://images.unsplash.com/photo-1548142813-c348350df52b?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MTR8fHNtaWxlfGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=500&q=60",
+          boxColor: Colors.blue,
         ),
       ),
     ]);
