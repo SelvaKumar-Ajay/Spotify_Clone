@@ -169,10 +169,14 @@ class NamedPlaylistTemplate extends StatelessWidget {
     return Column(
       children: [
         ListTile(
-          leading: CircleAvatar(
-            child: Image.asset(
-              yourtopMixDataList[0].image,
-              color: whiteColor,
+          leading: Container(
+            decoration: const BoxDecoration(shape: BoxShape.circle),
+            clipBehavior: Clip.antiAlias,
+            child: CircleAvatar(
+              child: Image(
+                image: NetworkImage(yourtopMixDataList[0].image),
+                fit: BoxFit.cover,
+              ),
             ),
           ),
           title: Text(

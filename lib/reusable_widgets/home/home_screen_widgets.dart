@@ -47,7 +47,7 @@ Container recentViewedPlaylist({
       Container(
         height: height * 0.1,
         width: RowRecentPlaylist(height: height, width: width).imgBoxWidth,
-        child: Image.asset(img, fit: BoxFit.cover),
+        child: Image(image: NetworkImage(img), fit: BoxFit.cover),
       ),
       SizedBox(
           width: RowRecentPlaylist(height: height, width: width)

@@ -29,9 +29,13 @@ Column titleOnlyTemplate({
             .sizeOfContainer,
         width: TitleOnlyTemplateSizes(height: height, width: width)
             .sizeOfContainer,
-        child: Image.asset(
-          image,
-          color: whiteColor,
+        child: Image(
+          image: NetworkImage(image),
+          fit: BoxFit.cover,
+          height: TitleOnlyTemplateSizes(height: height, width: width)
+              .sizeOfContainer,
+          width: TitleOnlyTemplateSizes(height: height, width: width)
+              .sizeOfContainer,
         ),
       ),
       SizedBox(

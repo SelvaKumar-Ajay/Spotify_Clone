@@ -31,7 +31,14 @@ Column yourTopMixesTemplate({
         width: YourtopMixSizes(height: height, width: width).sizeOfContainer,
         child: Stack(
           children: [
-            Image.asset(image, color: color),
+            Image(
+              image: NetworkImage(image),
+              fit: BoxFit.cover,
+              height:
+                  YourtopMixSizes(height: height, width: width).sizeOfContainer,
+              width:
+                  YourtopMixSizes(height: height, width: width).sizeOfContainer,
+            ),
             Padding(
               padding: EdgeInsets.all(
                   YourtopMixSizes(height: height, width: width).paddingSize),

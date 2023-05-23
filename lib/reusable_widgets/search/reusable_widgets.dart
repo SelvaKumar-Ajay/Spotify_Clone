@@ -35,7 +35,7 @@ Container cards({
                 maxLines: 4,
                 overflow: TextOverflow.clip,
                 style: const TextStyle(
-                    fontSize: 15.0, fontWeight: FontWeight.bold),
+                    fontSize: 16.0, fontWeight: FontWeight.bold),
               ),
             ),
           ),
@@ -50,9 +50,9 @@ Container cards({
               clipBehavior: Clip.antiAlias,
               decoration:
                   BoxDecoration(borderRadius: BorderRadius.circular(10.0)),
-              child: Image.asset(
-                fit: BoxFit.contain,
-                img,
+              child: Image(
+                image: NetworkImage(img),
+                fit: BoxFit.cover,
                 height:
                     ContainerSizes(height: height, width: width).imgHeightWidth,
                 width:

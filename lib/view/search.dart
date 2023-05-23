@@ -4,7 +4,8 @@ import 'package:spotify/constants/constants.dart';
 import 'package:spotify/data/search/cards.dart';
 import 'package:spotify/reusable_widgets/search/reusable_widgets.dart';
 import 'package:spotify/reusable_widgets/streamer_box.dart';
-import 'package:spotify/view/songs_list.dart';
+import 'package:spotify/view/song_screen.dart';
+// import 'package:spotify/view/songs_list.dart';
 import '../reusable_widgets/home/reusable_widgets.dart';
 
 class SearchScreen extends StatefulWidget {
@@ -126,7 +127,7 @@ class _SearchScreenState extends State<SearchScreen> {
                       onTap: () {
                         Navigator.of(context).push(
                           MaterialPageRoute(
-                            builder: (context) => const SongPage(),
+                            builder: (context) => const AudioPlayerScreen(),
                           ),
                         );
                         // player.play(AssetSource("Vaseegara.mp3"));
@@ -152,13 +153,22 @@ class _SearchScreenState extends State<SearchScreen> {
         bottom: 0,
         right: 0,
         left: 0,
-        child: StreamerBox(
-          title: "Title of Song with rock lee",
-          artist: 'Naruto',
-          audioPath: audioPath1,
-          image:
-              "https://images.unsplash.com/photo-1548142813-c348350df52b?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MTR8fHNtaWxlfGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=500&q=60",
-          boxColor: Colors.blue,
+        child: GestureDetector(
+          onTap: () {
+            // Navigator.of(context).push(
+            //   MaterialPageRoute(
+            //     builder: (context) => const AudioPlayerScreen(),
+            //   ),
+            // );
+          },
+          child: StreamerBox(
+            title: "Title of Song with rock lee",
+            artist: 'Naruto',
+            audioPath: audioPath1,
+            image:
+                "https://images.unsplash.com/photo-1548142813-c348350df52b?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MTR8fHNtaWxlfGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=500&q=60",
+            boxColor: Colors.blue,
+          ),
         ),
       ),
     ]);
