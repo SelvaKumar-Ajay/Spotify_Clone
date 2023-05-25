@@ -24,7 +24,7 @@ class SearchTabDataCards {
       text: "Live events",
       img:
           "https://images.unsplash.com/photo-1619983081563-430f63602796?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NHx8YWxidW18ZW58MHx8MHx8fDA%3D&auto=format&fit=crop&w=500&q=60",
-      color: whiteColor,
+      color: greyColor,
     ),
     SearchTabCards(
       text: "Tamil",
@@ -36,7 +36,7 @@ class SearchTabDataCards {
       text: "Made For You",
       img:
           "https://images.unsplash.com/photo-1605286111427-67133b091012?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8OXx8YWxidW18ZW58MHx8MHx8fDA%3D&auto=format&fit=crop&w=500&q=60",
-      color: yellowColor,
+      color: blackColor,
     ),
     SearchTabCards(
       text: "Hindi",
@@ -101,19 +101,19 @@ class SearchTabDataCards {
     SearchTabCards(
       text: "Party",
       img:
-          "https://images.unsplash.com/photo-1494894194458-0174142560c0?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTZ8fGFsYnVtJTIwY292ZXJzfGVufDB8fDB8fHww&auto=format&fit=crop&w=500&q=60",
+          "https://images.unsplash.com/photo-1548621641-6aa2e973a768?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTl8fGNvdmVyJTIwc29uZ3N8ZW58MHx8MHx8fDA%3D&auto=format&fit=crop&w=500&q=60",
       color: greyColor,
     ),
     SearchTabCards(
       text: "Devotional",
       img:
-          "https://images.unsplash.com/photo-1494894194458-0174142560c0?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTZ8fGFsYnVtJTIwY292ZXJzfGVufDB8fDB8fHww&auto=format&fit=crop&w=500&q=60",
+          "https://images.unsplash.com/photo-1663190579915-6677c4aaec4b?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTN8fGNvdmVyJTIwc29uZ3N8ZW58MHx8MHx8fDA%3D&auto=format&fit=crop&w=500&q=60",
       color: brownColor,
     ),
     SearchTabCards(
       text: "Chill",
       img:
-          "https://images.unsplash.com/photo-1494894194458-0174142560c0?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTZ8fGFsYnVtJTIwY292ZXJzfGVufDB8fDB8fHww&auto=format&fit=crop&w=500&q=60",
+          "https://images.unsplash.com/photo-1504387103978-e4ee71416c38?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MXx8Y292ZXIlMjBzb25nc3xlbnwwfHwwfHx8MA%3D%3D&auto=format&fit=crop&w=500&q=60",
       color: searchBarColor,
     ),
     SearchTabCards(

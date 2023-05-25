@@ -1,6 +1,8 @@
 // import 'package:audioplayers/audioplayers.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:spotify/constants/constants.dart';
+import 'package:spotify/data/current_song.dart';
 import 'package:spotify/data/search/cards.dart';
 import 'package:spotify/reusable_widgets/search/reusable_widgets.dart';
 import 'package:spotify/reusable_widgets/streamer_box.dart';
@@ -27,15 +29,19 @@ class SearchScreen extends StatefulWidget {
 
 class _SearchScreenState extends State<SearchScreen> {
   List<SearchTabCards> searchTabData = SearchTabDataCards().serachTabData;
-  final audioPath1 = "lib/musics/Vaseegara.mp3";
-  final audioPath2 = "lib/musics/PathuThala.mp3";
-  final audioPath3 = "lib/musics/Arabu-Naade.mp3";
+  // final audioPath1 = "lib/musics/Vaseegara.mp3";
+  // final audioPath2 = "lib/musics/PathuThala.mp3";
+  // final audioPath3 = "lib/musics/Arabu-Naade.mp3";
+  String pageKey() {
+    return "streamerBox";
+  }
 
   @override
   Widget build(BuildContext context) {
     // debugPrint("Search");
     double width = MediaQuery.of(context).size.width;
     double height = MediaQuery.of(context).size.height;
+    final currentSongData = Provider.of<CurrentSongData>(context);
 
     return Stack(children: [
       SingleChildScrollView(
@@ -127,7 +133,9 @@ class _SearchScreenState extends State<SearchScreen> {
                       onTap: () {
                         Navigator.of(context).push(
                           MaterialPageRoute(
-                            builder: (context) => const AudioPlayerScreen(),
+                            builder: (context) => AudioPlayerScreen(
+                              audioPlayer: currentSongData.data.audioPlayer,
+                            ),
                           ),
                         );
                         // player.play(AssetSource("Vaseegara.mp3"));
@@ -154,12 +162,15 @@ class _SearchScreenState extends State<SearchScreen> {
         right: 0,
         left: 0,
         child: StreamerBox(
-          title: "Title of Song with rock lee",
-          artist: 'Naruto',
-          audioPath: audioPath1,
-          image:
-              "https://images.unsplash.com/photo-1548142813-c348350df52b?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MTR8fHNtaWxlfGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=500&q=60",
-          boxColor: Colors.blue,
+          currentSongData: currentSongData,
+          openAudio: currentSongData.data.openAudio,
+          isPlaying: currentSongData.data.isPlaying,
+          audioPlayer: currentSongData.data.audioPlayer,
+          title: currentSongData.data.title,
+          artist: currentSongData.data.artist,
+          audioPath: currentSongData.data.audioPath,
+          image: currentSongData.data.img,
+          boxColor: currentSongData.data.color,
         ),
       ),
     ]);

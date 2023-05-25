@@ -4,12 +4,16 @@ import 'package:assets_audio_player/assets_audio_player.dart';
 // import 'package:audioplayers/audioplayers.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:spotify/constants/constants.dart';
+import 'package:spotify/data/current_song.dart';
 // import 'package:palette_generator/palette_generator.dart';
 // import 'package:flutter_colorpicker/flutter_colorpicker.dart';
 
 class AudioPlayerScreen extends StatefulWidget {
-  const AudioPlayerScreen({Key? key}) : super(key: key);
+  const AudioPlayerScreen({Key? key, required this.audioPlayer})
+      : super(key: key);
+  final AssetsAudioPlayer audioPlayer;
 
   @override
   State<AudioPlayerScreen> createState() => _AudioPlayerScreenState();
@@ -22,7 +26,7 @@ class _AudioPlayerScreenState extends State<AudioPlayerScreen> {
   bool _isPlaying = false;
   bool _isPaused = false;
   double _sliderValue = 0.0;
-  AssetsAudioPlayer _audioPlayer = AssetsAudioPlayer();
+  late AssetsAudioPlayer _audioPlayer;
 
   final List<String> images = [
     'lib/images/calmdown1.jpg',
@@ -71,7 +75,7 @@ class _AudioPlayerScreenState extends State<AudioPlayerScreen> {
   @override
   void initState() {
     super.initState();
-    _audioPlayer = AssetsAudioPlayer();
+    _audioPlayer = widget.audioPlayer;
 
     _audioPlayer.currentPosition.listen((event) {
       setState(() {
@@ -196,8 +200,8 @@ class _AudioPlayerScreenState extends State<AudioPlayerScreen> {
                     (item) => Container(
                       //  height: height * 0.5,
                       // width: width,
-                      height: 400,
-                      width: 300,
+                      // height: 400,
+                      width: double.infinity,
                       margin: const EdgeInsets.all(5.0),
                       child: ClipRRect(
                         borderRadius:
@@ -212,14 +216,14 @@ class _AudioPlayerScreenState extends State<AudioPlayerScreen> {
                   .toList(),
               carouselController: _controller,
               options: CarouselOptions(
-                // height: height * 0.5,
-                height: 300,
+                height: height * 0.47,
+                // height: 300,
                 // autoPlay: true,
                 enableInfiniteScroll: true,
                 enlargeCenterPage: true,
-                viewportFraction: 1.0,
+                viewportFraction: 0.9,
                 // need square image
-                aspectRatio: 1,
+                aspectRatio: 16 / 9,
                 onPageChanged: (index, reason) {
                   setState(() {
                     _current = index;
@@ -249,7 +253,7 @@ class _AudioPlayerScreenState extends State<AudioPlayerScreen> {
                         fontWeight: FontWeight.bold,
                       ),
                     ),
-                    const SizedBox(height: 4),
+                    SizedBox(height: height * 0.01),
                     Text(
                       imagesArtistNames[_current],
                       style: const TextStyle(color: Colors.grey),
@@ -315,7 +319,7 @@ class _AudioPlayerScreenState extends State<AudioPlayerScreen> {
                   size: 30,
                   color: Colors.white,
                 ),
-                const SizedBox(width: 20),
+                SizedBox(width: width * 0.05),
                 const Icon(
                   Icons.skip_previous_rounded,
                   size: 30,
@@ -340,7 +344,7 @@ class _AudioPlayerScreenState extends State<AudioPlayerScreen> {
                   size: 30,
                   color: Colors.white,
                 ),
-                const SizedBox(width: 20),
+                SizedBox(width: width * 0.05),
                 const Icon(
                   Icons.repeat,
                   size: 30,

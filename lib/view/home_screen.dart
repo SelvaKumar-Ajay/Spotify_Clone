@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:spotify/constants/constants.dart';
+import 'package:spotify/data/current_song.dart';
 import 'package:spotify/data/data.dart';
 import 'package:spotify/functions/functions.dart';
 import 'package:spotify/reusable_widgets/home/reusable_widgets.dart';
@@ -19,6 +21,7 @@ class _HomeScreenState extends State<HomeScreen> {
     final double width = MediaQuery.of(context).size.width;
     List<TopMixDataTemplate> yourtopMixDataList =
         TopMixData().yourTopMixesData();
+    final currentSongData = Provider.of<CurrentSongData>(context);
 
     return Stack(children: [
       SingleChildScrollView(
@@ -91,17 +94,20 @@ class _HomeScreenState extends State<HomeScreen> {
           ),
         ),
       ),
-      const Positioned(
+      Positioned(
         bottom: 0,
         right: 0,
         left: 0,
         child: StreamerBox(
-          title: "Arabu Naade",
-          artist: 'Yuvan Shankar Raja',
-          audioPath: 'lib/musics/Arabu-Naade.mp3',
-          image:
-              "https://images.unsplash.com/photo-1548142813-c348350df52b?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MTR8fHNtaWxlfGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=500&q=60",
-          boxColor: Colors.blue,
+          currentSongData: currentSongData,
+          openAudio: currentSongData.data.openAudio,
+          isPlaying: currentSongData.data.isPlaying,
+          audioPlayer: currentSongData.data.audioPlayer,
+          title: currentSongData.data.title,
+          artist: currentSongData.data.artist,
+          audioPath: currentSongData.data.audioPath,
+          image: currentSongData.data.img,
+          boxColor: currentSongData.data.color,
         ),
       ),
     ]);

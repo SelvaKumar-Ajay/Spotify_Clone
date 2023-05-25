@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:marquee/marquee.dart';
 import 'package:assets_audio_player/assets_audio_player.dart';
+import 'package:provider/provider.dart';
+import 'package:spotify/data/current_song.dart';
 import 'package:spotify/view/song_screen.dart';
 // import 'package:audioplayers_web/audioplayers_web.dart';
 import '../constants/constants.dart';
@@ -11,6 +13,10 @@ class StreamerBox extends StatefulWidget {
   final String image;
   final Color boxColor;
   final String audioPath;
+  final AssetsAudioPlayer audioPlayer;
+  final bool isPlaying;
+  final bool openAudio;
+  final CurrentSongData currentSongData;
 
   const StreamerBox({
     Key? key,
@@ -19,6 +25,10 @@ class StreamerBox extends StatefulWidget {
     required this.image,
     required this.boxColor,
     required this.audioPath,
+    required this.audioPlayer,
+    required this.isPlaying,
+    required this.openAudio,
+    required this.currentSongData,
   }) : super(key: key);
 
   @override
@@ -27,22 +37,25 @@ class StreamerBox extends StatefulWidget {
 
 class _StreamerBoxState extends State<StreamerBox> {
   Duration _duration = Duration.zero;
-  bool _isPlaying = false;
-  bool _isPaused = false;
+  late bool _isPlaying;
+  late bool _openAudio;
   double _sliderValue = 0.0;
-  AssetsAudioPlayer _audioPlayer = AssetsAudioPlayer();
-
-  // AudioPlayer player = AudioPlayer();
-  // Duration _duration = Duration(seconds: 90);
+  late AssetsAudioPlayer _audioPlayer;
 
   @override
   void initState() {
     super.initState();
-    _audioPlayer = AssetsAudioPlayer();
-
+    // var currentSongData = Provider.of<CurrentSongData>(context, listen: true);
+    // _audioPlayer = currentSongData.data.audioPlayer;
+    // _isPlaying = currentSongData.data.isPlaying;
+    // _openAudio = currentSongData.data.openAudio;
+    _audioPlayer = widget.audioPlayer;
+    _isPlaying = widget.isPlaying;
+    _openAudio = widget.openAudio;
     _audioPlayer.currentPosition.listen((event) {
       setState(() {
         _sliderValue = event.inSeconds.toDouble();
+        // widget.currentSongData.data.sliderValue = _sliderValue;
       });
       // debugPrint('cp $_sliderValue');
     });
@@ -51,40 +64,66 @@ class _StreamerBoxState extends State<StreamerBox> {
         // _sliderValue = value!.audio.duration.inSeconds.toDouble();
         // debugPrint('$_sliderValue');
         _duration = value!.audio.duration;
+        // widget.currentSongData.data.duration = _duration.inSeconds.toDouble();
+
         // debugPrint('$_duration');
       });
     });
   }
+
+  // void notify(BuildContext context) {
+  //   Provider.of<CurrentSongData>(context, listen: false).notify();
+  // }
 
   void openAudio() {
     _audioPlayer.open(Audio(widget.audioPath));
   }
 
   void togglePlayer() {
-    if (_isPlaying) {
-      _audioPlayer.play();
+    // var currentSongData = Provider.of<CurrentSongData>(context, listen: true);
+    if (_openAudio) {
+      _openAudio = !_openAudio;
+      widget.currentSongData.data.openAudio = _openAudio;
+      openAudio();
+
       setState(() {
-        _isPaused = true;
-        _isPlaying = false;
+        _isPlaying = !_isPlaying;
+        widget.currentSongData.data.isPlaying = _isPlaying;
+        // debugPrint(widget.currentSongData.data.isPlaying.toString());
       });
-    } else if (_isPaused) {
+    } else if (_isPlaying) {
       _audioPlayer.pause();
       setState(() {
-        _isPaused = false;
-        _isPlaying = true;
+        // _isPaused = !_isPaused;
+        _isPlaying = !_isPlaying;
+        widget.currentSongData.data.isPlaying = _isPlaying;
+        // debugPrint(widget.currentSongData.data.isPlaying.toString());
       });
     } else {
-      openAudio();
+      _audioPlayer.play();
       setState(() {
-        _isPaused = true;
+        // _isPaused = !_isPaused;
+        _isPlaying = !_isPlaying;
+        widget.currentSongData.data.isPlaying = _isPlaying;
+        // debugPrint(widget.currentSongData.data.isPlaying.toString());
       });
     }
+    // notify(context);
+    //else {
+    //   openAudio();
+    //   setState(() {
+    //     _isPaused = !_isPaused;
+    //     widget.currentSongData.data.isPaused = _isPaused;
+    //     // widget.currentSongData.data.isPlaying = _isPlaying;
+    //   });
+    // }
   }
 
   void _onSliderChanged(double value) {
     _audioPlayer.seek(Duration(seconds: value.toInt()));
     setState(() {
       _sliderValue = value;
+      // widget.currentSongData.data.sliderValue = _sliderValue;
     });
   }
 
@@ -99,20 +138,22 @@ class _StreamerBoxState extends State<StreamerBox> {
     // debugPrint("Streamer Box");
     double width = MediaQuery.of(context).size.width;
     double height = MediaQuery.of(context).size.height;
-    // final currentAudio = _audioPlayer.current;
+    var currentSongData = Provider.of<CurrentSongData>(context, listen: true);
 
     return GestureDetector(
       onTap: () {
         Navigator.of(context).push(
           MaterialPageRoute(
-            builder: (context) => const AudioPlayerScreen(),
+            builder: (context) => AudioPlayerScreen(
+              audioPlayer: currentSongData.data.audioPlayer,
+            ),
           ),
         );
       },
       child: Column(children: [
         //Streamer box
         Container(
-          color: widget.boxColor,
+          color: currentSongData.data.color,
           height: StreamerBoxSizes(height: height, width: width).container,
           child: Padding(
             padding: EdgeInsets.all(
@@ -125,8 +166,8 @@ class _StreamerBoxState extends State<StreamerBox> {
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(8.0),
                   ),
-                  child: Image.network(
-                    widget.image,
+                  child: Image.asset(
+                    currentSongData.data.img,
                     height:
                         StreamerBoxSizes(height: height, width: width).imgHW,
                     width: StreamerBoxSizes(height: height, width: width).imgHW,
@@ -143,9 +184,9 @@ class _StreamerBoxState extends State<StreamerBox> {
                       SizedBox(
                         height: StreamerBoxSizes(height: height, width: width)
                             .textAnimationHeight,
-                        child: widget.title.length > 30
+                        child: currentSongData.data.title.length > 30
                             ? Marquee(
-                                text: widget.title,
+                                text: currentSongData.data.title,
                                 blankSpace: 10.0,
                                 velocity: 60.0,
                                 pauseAfterRound: const Duration(seconds: 2),
@@ -164,7 +205,7 @@ class _StreamerBoxState extends State<StreamerBox> {
                                 ),
                               )
                             : Text(
-                                widget.title,
+                                currentSongData.data.title,
                                 style: const TextStyle(
                                   color: whiteColor,
                                   fontSize: 13.0,
@@ -172,7 +213,7 @@ class _StreamerBoxState extends State<StreamerBox> {
                               ),
                       ),
                       Text(
-                        widget.artist,
+                        currentSongData.data.artist,
                         style: TextStyle(
                           color: whiteColor.withOpacity(0.5),
                           fontSize: 11.0,
@@ -194,7 +235,7 @@ class _StreamerBoxState extends State<StreamerBox> {
                 ),
                 IconButton(
                     onPressed: togglePlayer,
-                    icon: _isPaused
+                    icon: _isPlaying
                         ? const Icon(Icons.pause)
                         : const Icon(Icons.play_arrow)),
               ],
