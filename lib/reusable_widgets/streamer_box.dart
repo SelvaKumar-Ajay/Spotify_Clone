@@ -136,6 +136,7 @@ class _StreamerBoxState extends State<StreamerBox> {
         Navigator.of(context).push(
           MaterialPageRoute(
             builder: (context) => AudioPlayerScreen(
+              songindex: currentSongData.data.songIndex,
               artist: currentSongData.data.artist,
               audioPath: currentSongData.data.audioPath,
               boxColor: currentSongData.data.color,
@@ -230,14 +231,18 @@ class _StreamerBoxState extends State<StreamerBox> {
                 ),
                 IconButton(
                   onPressed: () {},
-                  icon: Image.asset(
-                    IconConstants.likeIcon,
-                    width:
-                        StreamerBoxSizes(height: height, width: width).iconHW,
-                    height:
-                        StreamerBoxSizes(height: height, width: width).iconHW,
-                    color: whiteColor,
+                  icon: const Icon(
+                    Icons.favorite,
+                    color: Colors.green,
                   ),
+                  //  Image.asset(
+                  //   IconConstants.likeIcon,
+                  //   width:
+                  //       StreamerBoxSizes(height: height, width: width).iconHW,
+                  //   height:
+                  //       StreamerBoxSizes(height: height, width: width).iconHW,
+                  //   color: whiteColor,
+                  // ),
                 ),
                 IconButton(
                     onPressed: togglePlayer,

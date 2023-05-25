@@ -1,5 +1,3 @@
-import 'dart:ui';
-
 import 'package:spotify/constants/constants.dart';
 
 class EpisForYouTemplate {
@@ -16,10 +14,10 @@ class EpisodeData {
             NetworkImages.episOne, "Nikki Bella", "Japanese Singer"),
         EpisForYouTemplate(
             NetworkImages.episTwo, "Your Name", "Your name Songs"),
-        EpisForYouTemplate(NetworkImages.episThree, "Motivation",
+        EpisForYouTemplate(NetworkImages.episThree, "Demon Slayer",
+            "Kimetsu no yaiba journey story"),
+        EpisForYouTemplate(NetworkImages.episFour, "Naruto Uzumaki",
             "Monday Motivation by Naruto"),
-        EpisForYouTemplate(
-            NetworkImages.episFour, "Couple Goal", "Songs for Couples"),
         EpisForYouTemplate(NetworkImages.indiasFour, "Rap",
             "Petta rap Prabhu deva and Vaigai puyal Vadivel"),
         EpisForYouTemplate(

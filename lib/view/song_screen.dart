@@ -20,6 +20,7 @@ class AudioPlayerScreen extends StatefulWidget {
   final AssetsAudioPlayer audioPlayer;
   final bool isPlaying;
   final bool openAudio;
+  final int songindex;
   final CurrentSongData currentSongData;
 
   const AudioPlayerScreen(
@@ -32,7 +33,8 @@ class AudioPlayerScreen extends StatefulWidget {
       required this.audioPath,
       required this.isPlaying,
       required this.openAudio,
-      required this.currentSongData})
+      required this.currentSongData,
+      required this.songindex})
       : super(key: key);
   @override
   State<AudioPlayerScreen> createState() => _AudioPlayerScreenState();
@@ -50,8 +52,8 @@ class _AudioPlayerScreenState extends State<AudioPlayerScreen> {
   late AssetsAudioPlayer _audioPlayer;
 
   final List<String> images = [
-    'lib/images/vaseegara.jpeg',
     'lib/images/arabu_naade.jpeg',
+    'lib/images/vaseegara.jpeg',
     'lib/images/calmdown1.jpg',
     'lib/images/Divide.jpeg',
     // 'lib/images/Equals.png',
@@ -62,8 +64,8 @@ class _AudioPlayerScreenState extends State<AudioPlayerScreen> {
     'lib/images/X.png',
   ];
   List<String> imgPaths = [
-    'lib/musics/Vaseegara.mp3',
     'lib/musics/Arabu-Naade.mp3',
+    'lib/musics/Vaseegara.mp3',
     'lib/musics/CalmDown.mp3',
     'lib/musics/Dive.mp3',
     // 'lib/musics/Leave Your Life.mp3',
@@ -74,8 +76,8 @@ class _AudioPlayerScreenState extends State<AudioPlayerScreen> {
     'lib/musics/Dont.mp3',
   ];
   final List<String> imagesNames = [
-    'Vaseegara',
     'Arabu Naade',
+    'Vaseegara',
     'Calm Down',
     'Divide',
     // 'Equals',
@@ -86,8 +88,8 @@ class _AudioPlayerScreenState extends State<AudioPlayerScreen> {
     'X',
   ];
   List<String> imagesArtistNames = [
-    'Bombay Jeya Shree',
     'Yuvan Shankar Raja',
+    'Bombay Jeya Shree',
     'Rema, Selena Gomez',
     'Ed Sheeran',
     // 'Ed Sheeran',
@@ -98,8 +100,8 @@ class _AudioPlayerScreenState extends State<AudioPlayerScreen> {
     'Ed Sheeran',
   ];
   List<Color> dycolors = [
-    redColor,
     greyColor,
+    redColor,
     brownColor,
     blueColor,
     // redColor,
@@ -119,7 +121,7 @@ class _AudioPlayerScreenState extends State<AudioPlayerScreen> {
     _audioPlayer = widget.audioPlayer;
     _isPlaying = widget.isPlaying;
     _openAudio = widget.openAudio;
-
+    _current = widget.songindex;
     _audioPlayer.currentPosition.listen((event) {
       setState(() {
         _sliderValue = event.inSeconds.toDouble();
@@ -151,23 +153,23 @@ class _AudioPlayerScreenState extends State<AudioPlayerScreen> {
       openAudio();
       _isPlaying = !_isPlaying;
       widget.currentSongData.data.isPlaying = _isPlaying;
-      widget.currentSongData.data.icon = const Icon(Icons.pause);
+      // widget.currentSongData.data.icon = const Icon(Icons.pause);
 
       // debugPrint(widget.currentSongData.data.isPlaying.toString());
-      debugPrint(
-          'openAudio ${widget.currentSongData.data.openAudio.toString()}');
+      // debugPrint(
+      //     'openAudio ${widget.currentSongData.data.openAudio.toString()}');
     } else if (_isPlaying) {
       _audioPlayer.pause();
       _isPlaying = !_isPlaying;
       widget.currentSongData.data.isPlaying = _isPlaying;
-      widget.currentSongData.data.icon = const Icon(Icons.play_arrow);
+      // widget.currentSongData.data.icon = const Icon(Icons.play_arrow);
       // debugPrint('else if ${widget.currentSongData.data.isPlaying.toString()}');
     } else {
       _audioPlayer.play();
       // _isPaused = !_isPaused;
       _isPlaying = !_isPlaying;
       widget.currentSongData.data.isPlaying = _isPlaying;
-      widget.currentSongData.data.icon = const Icon(Icons.play_arrow);
+      // widget.currentSongData.data.icon = const Icon(Icons.play_arrow);
 
       // debugPrint('else ${widget.currentSongData.data.isPlaying.toString()}');
     }
@@ -192,6 +194,7 @@ class _AudioPlayerScreenState extends State<AudioPlayerScreen> {
   Widget build(BuildContext context) {
     double height = MediaQuery.of(context).size.height;
     double width = MediaQuery.of(context).size.width;
+    SongScreenSizes sizes = SongScreenSizes(height, width);
     return Scaffold(
       backgroundColor: dycolors.isEmpty ? Colors.white : dycolors[_current],
       // transparentColor,
@@ -241,7 +244,7 @@ class _AudioPlayerScreenState extends State<AudioPlayerScreen> {
         centerTitle: true,
       ),
       body: Container(
-        padding: const EdgeInsets.all(20),
+        padding: EdgeInsets.all(sizes.containerPadding),
         decoration: BoxDecoration(
           gradient: LinearGradient(
             colors: [
@@ -254,62 +257,67 @@ class _AudioPlayerScreenState extends State<AudioPlayerScreen> {
         ),
         child: Column(
           children: [
-            CarouselSlider(
-              items: images
-                  .map(
-                    (item) => Container(
-                      //  height: height * 0.5,
-                      // width: width,
-                      // height: 400,
-                      width: double.infinity,
-                      margin: const EdgeInsets.all(5.0),
-                      child: ClipRRect(
-                        borderRadius:
-                            const BorderRadius.all(Radius.circular(5.0)),
-                        child: Image.asset(
-                          item,
-                          fit: BoxFit.cover,
+            Expanded(
+              child: CarouselSlider(
+                items: images
+                    .map(
+                      (item) => SizedBox(
+                        //  height: height * 0.5,
+                        // width: width,
+                        // height: 400,
+                        width: double.infinity,
+                        // margin: const EdgeInsets.all(),
+                        child: ClipRRect(
+                          borderRadius:
+                              const BorderRadius.all(Radius.circular(5.0)),
+                          child: Image.asset(
+                            item,
+                            fit: BoxFit.cover,
+                          ),
                         ),
                       ),
-                    ),
-                  )
-                  .toList(),
-              carouselController: _controller,
-              options: CarouselOptions(
-                height: height * 0.47,
-                // height: 300,
-                // autoPlay: true,
-                enableInfiniteScroll: true,
-                enlargeCenterPage: true,
-                viewportFraction: 0.9,
-                // need square image
-                aspectRatio: 16 / 9,
-                onPageChanged: (index, reason) {
-                  widget.currentSongData.data.artist = imagesArtistNames[index];
-                  widget.currentSongData.data.audioPath = imgPaths[index];
-                  widget.currentSongData.data.color = dycolors[index];
-                  widget.currentSongData.data.img = images[index];
-                  widget.currentSongData.data.title = imagesNames[index];
-                  widget.currentSongData.data.openAudio = true;
-                  widget.currentSongData.data.isPlaying = false;
-                  notify(context);
+                    )
+                    .toList(),
+                carouselController: _controller,
+                options: CarouselOptions(
+                  initialPage: _current,
+                  height: sizes.image,
+                  // height: 300,
+                  // autoPlay: true,
+                  enableInfiniteScroll: true,
+                  enlargeCenterPage: true,
+                  viewportFraction: 0.9,
+                  // need square image
+                  aspectRatio: 16 / 9,
+                  onPageChanged: (index, reason) {
+                    widget.currentSongData.data.artist =
+                        imagesArtistNames[index];
+                    widget.currentSongData.data.audioPath = imgPaths[index];
+                    widget.currentSongData.data.color = dycolors[index];
+                    widget.currentSongData.data.img = images[index];
+                    widget.currentSongData.data.title = imagesNames[index];
+                    widget.currentSongData.data.openAudio = true;
+                    widget.currentSongData.data.isPlaying = false;
+                    widget.currentSongData.data.songIndex = index;
+                    notify(context);
 
-                  setState(() {
-                    _current = index;
-                    _audioPlayer.stop();
-                    _openAudio = true;
-                    _isPlaying = false;
-                    // reset audio position
-                    _sliderValue = 0.0;
-                  });
-                },
+                    setState(() {
+                      _current = index;
+                      _audioPlayer.stop();
+                      _openAudio = true;
+                      _isPlaying = false;
+                      // reset audio position
+                      _sliderValue = 0.0;
+                    });
+                  },
+                ),
               ),
             ),
             // ClipRRect(
             //   borderRadius: BorderRadius.circular(10),
             //   child: Image.asset('assets/audio/audio_poster/calmdown.jpg'),
             // ),
-            SizedBox(height: height * 0.1),
+            SizedBox(height: sizes.spacebwImgTitle),
 
             Row(
               children: [
@@ -319,9 +327,9 @@ class _AudioPlayerScreenState extends State<AudioPlayerScreen> {
                     Text(
                       // widget.title,
                       imagesNames[_current],
-                      style: const TextStyle(
+                      style: TextStyle(
                         color: Colors.white,
-                        fontSize: 20,
+                        fontSize: sizes.titleText,
                         fontWeight: FontWeight.bold,
                       ),
                     ),
@@ -334,9 +342,9 @@ class _AudioPlayerScreenState extends State<AudioPlayerScreen> {
                   ],
                 ),
                 const Spacer(),
-                const Icon(
+                Icon(
                   Icons.favorite,
-                  size: 30,
+                  size: sizes.icon,
                   color: Colors.green,
                 ),
               ],
@@ -369,17 +377,17 @@ class _AudioPlayerScreenState extends State<AudioPlayerScreen> {
               children: [
                 Text(
                   formatTime(Duration(seconds: _sliderValue.toInt())),
-                  style: const TextStyle(
+                  style: TextStyle(
                     color: Colors.white,
-                    fontSize: 12,
+                    fontSize: sizes.timingValues,
                   ),
                 ),
                 Text(
                   formatTime(
                       _duration - Duration(seconds: _sliderValue.toInt())),
-                  style: const TextStyle(
+                  style: TextStyle(
                     color: Colors.white,
-                    fontSize: 12,
+                    fontSize: sizes.timingValues,
                   ),
                 ),
               ],
@@ -387,37 +395,37 @@ class _AudioPlayerScreenState extends State<AudioPlayerScreen> {
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
-                const Icon(
+                Icon(
                   Icons.shuffle,
-                  size: 30,
+                  size: sizes.icon,
                   color: Colors.white,
                 ),
                 SizedBox(width: width * 0.05),
-                const Icon(
+                Icon(
                   Icons.skip_previous_rounded,
-                  size: 30,
+                  size: sizes.icon,
                   color: Colors.white,
                 ),
                 CircleAvatar(
-                  radius: 35,
+                  radius: sizes.avatarRadius,
                   backgroundColor: Colors.white,
                   child: IconButton(
                     icon: _isPlaying
                         ? const Icon(Icons.pause)
                         : const Icon(Icons.play_arrow),
-                    iconSize: 40,
+                    iconSize: sizes.playPause,
                     onPressed: togglePlayer,
                   ),
                 ),
-                const Icon(
+                Icon(
                   Icons.skip_next_rounded,
-                  size: 30,
+                  size: sizes.icon,
                   color: Colors.white,
                 ),
                 SizedBox(width: width * 0.05),
-                const Icon(
+                Icon(
                   Icons.repeat,
-                  size: 30,
+                  size: sizes.icon,
                   color: Colors.white,
                 ),
               ],

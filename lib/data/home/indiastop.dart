@@ -1,5 +1,3 @@
-import 'dart:ui';
-
 import 'package:spotify/constants/constants.dart';
 
 class IndiasTopTemplate {

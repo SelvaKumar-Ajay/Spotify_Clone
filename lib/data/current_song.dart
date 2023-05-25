@@ -34,10 +34,10 @@ class CurrentSong {
 
 class CurrentSongData with ChangeNotifier {
   CurrentSong data = CurrentSong(
-    "lib/images/calmdown1.jpg",
-    'Calm Down',
-    'Rema, Selena Gomez',
-    "lib/musics/Vaseegara.mp3",
+    'lib/images/arabu_naade.jpeg',
+    'Arabu Naade',
+    'Yuvan Shankar Raja',
+    'lib/musics/Arabu-Naade.mp3',
     false,
     true,
     brownColor,

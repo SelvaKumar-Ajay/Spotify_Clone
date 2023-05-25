@@ -38,7 +38,7 @@ class NetworkImages {
   static const String episTwo =
       "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ1JUPbv2A7EJ9DiD_1989LEK3EWiuGl6okng&usqp=CAU";
   static const String episThree =
-      "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRZWr4HVTvL9Mizj4dpW3qfR-oyFGpTXx6wXg&usqp=CAU";
+      "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTHyMTlJD6C1fk506uBCfae9lzZby7MzhE87w&usqp=CAU";
   static const String episFour =
       "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRZWr4HVTvL9Mizj4dpW3qfR-oyFGpTXx6wXg&usqp=CAU";
   static const String episFive =

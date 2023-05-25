@@ -61,16 +61,16 @@ class _HomeScreenState extends State<HomeScreen> {
                   secondImage: NetworkImages.vijay,
                   secondText: StringConstants.vijayHits,
                 ),
-                titleText(text: StringConstants.yourTopMixes, width: width),
-                StackedPlaylistTemplate(
-                    width: width,
-                    height: height,
-                    yourtopMixDataList: yourtopMixDataList),
                 titleText(text: StringConstants.indiasBest, width: width),
                 NormalPlaylistTemplate(
                     width: width,
                     height: height,
                     yourtopMixDataList: indiasBestDataList),
+                titleText(text: StringConstants.yourTopMixes, width: width),
+                StackedPlaylistTemplate(
+                    width: width,
+                    height: height,
+                    yourtopMixDataList: yourtopMixDataList),
                 titleText(text: StringConstants.episForYou, width: width),
                 NormalTitleTemplate(
                   width: width,

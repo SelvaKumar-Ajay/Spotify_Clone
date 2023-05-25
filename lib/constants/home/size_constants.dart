@@ -81,9 +81,9 @@ class YourtopMixSizes {
       (width * 0.4) * 0.9; //(40% from the size of width) then 90% from the 40%
   late double rightMarginSize = width * 0.05;
   late double bottomBarWidth = sizeOfContainer * 0.06;
-  late double spotifyIconHeight = sizeOfContainer * 0.15;
+  late double spotifyIconHeight = sizeOfContainer * 0.10;
   late double spotifyIconWidth =
-      sizeOfContainer * 0.15; //20% from the size of Container
+      sizeOfContainer * 0.10; //10% from the size of Container
   late double paddingSize =
       sizeOfContainer * 0.04; //4% from the Size of Container
   late double bottomTextContainerHeight = sizeOfContainer * 0.1;
