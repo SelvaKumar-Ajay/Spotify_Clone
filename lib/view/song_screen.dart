@@ -7,14 +7,33 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:spotify/constants/constants.dart';
 import 'package:spotify/data/current_song.dart';
+import 'package:spotify/view/home_screen.dart';
 // import 'package:palette_generator/palette_generator.dart';
 // import 'package:flutter_colorpicker/flutter_colorpicker.dart';
 
 class AudioPlayerScreen extends StatefulWidget {
-  const AudioPlayerScreen({Key? key, required this.audioPlayer})
-      : super(key: key);
+  final String title;
+  final String artist;
+  final String image;
+  final Color boxColor;
+  final String audioPath;
   final AssetsAudioPlayer audioPlayer;
+  final bool isPlaying;
+  final bool openAudio;
+  final CurrentSongData currentSongData;
 
+  const AudioPlayerScreen(
+      {Key? key,
+      required this.audioPlayer,
+      required this.title,
+      required this.artist,
+      required this.image,
+      required this.boxColor,
+      required this.audioPath,
+      required this.isPlaying,
+      required this.openAudio,
+      required this.currentSongData})
+      : super(key: key);
   @override
   State<AudioPlayerScreen> createState() => _AudioPlayerScreenState();
 }
@@ -23,35 +42,55 @@ class _AudioPlayerScreenState extends State<AudioPlayerScreen> {
   final CarouselController _controller = CarouselController();
   int _current = 0;
   Duration _duration = Duration.zero;
-  bool _isPlaying = false;
-  bool _isPaused = false;
+  // bool _isPlaying = false;
+  // bool _isPaused = false;
+  late bool _isPlaying;
+  late bool _openAudio;
   double _sliderValue = 0.0;
   late AssetsAudioPlayer _audioPlayer;
 
   final List<String> images = [
+    'lib/images/vaseegara.jpeg',
+    'lib/images/arabu_naade.jpeg',
     'lib/images/calmdown1.jpg',
     'lib/images/Divide.jpeg',
-    'lib/images/Equals.png',
+    // 'lib/images/Equals.png',
     'lib/images/Know.jpg',
     'lib/images/perfect.jpg',
     'lib/images/starboy.jpg',
     'lib/images/subract.png',
     'lib/images/X.png',
   ];
+  List<String> imgPaths = [
+    'lib/musics/Vaseegara.mp3',
+    'lib/musics/Arabu-Naade.mp3',
+    'lib/musics/CalmDown.mp3',
+    'lib/musics/Dive.mp3',
+    // 'lib/musics/Leave Your Life.mp3',
+    'lib/musics/Know.mp3',
+    'lib/musics/Perfect.mp3',
+    'lib/musics/Starboy.mp3',
+    'lib/musics/Subtract.mp3',
+    'lib/musics/Dont.mp3',
+  ];
   final List<String> imagesNames = [
+    'Vaseegara',
+    'Arabu Naade',
     'Calm Down',
     'Divide',
-    'Equals',
+    // 'Equals',
     'Know',
     'Perfect',
     'Starboy',
     'Subract',
     'X',
   ];
-  final List<String> imagesArtistNames = [
+  List<String> imagesArtistNames = [
+    'Bombay Jeya Shree',
+    'Yuvan Shankar Raja',
     'Rema, Selena Gomez',
     'Ed Sheeran',
-    'Ed Sheeran',
+    // 'Ed Sheeran',
     'The Chainsmokers',
     'Ed Sheeran',
     'The Weeknd',
@@ -59,9 +98,11 @@ class _AudioPlayerScreenState extends State<AudioPlayerScreen> {
     'Ed Sheeran',
   ];
   List<Color> dycolors = [
+    redColor,
+    greyColor,
     brownColor,
     blueColor,
-    redColor,
+    // redColor,
     greyColor,
     blueColor,
     redColor,
@@ -76,6 +117,8 @@ class _AudioPlayerScreenState extends State<AudioPlayerScreen> {
   void initState() {
     super.initState();
     _audioPlayer = widget.audioPlayer;
+    _isPlaying = widget.isPlaying;
+    _openAudio = widget.openAudio;
 
     _audioPlayer.currentPosition.listen((event) {
       setState(() {
@@ -94,33 +137,47 @@ class _AudioPlayerScreenState extends State<AudioPlayerScreen> {
   }
 
   void openAudio() {
-    _audioPlayer.open(Audio("lib/musics/Vaseegara.mp3"));
+    _audioPlayer.open(Audio(imgPaths[_current]));
+  }
+
+  void notify(BuildContext context) {
+    Provider.of<CurrentSongData>(context, listen: false).notify();
   }
 
   void togglePlayer() {
-    if (_isPlaying) {
-      _audioPlayer.play();
-      setState(() {
-        _isPaused = !_isPaused;
-        _isPlaying = !_isPlaying;
-      });
-    } else if (_isPaused) {
-      _audioPlayer.pause();
-      setState(() {
-        _isPaused = !_isPaused;
-        _isPlaying = !_isPlaying;
-      });
-    } else {
+    if (_openAudio) {
+      _openAudio = !_openAudio;
+      widget.currentSongData.data.openAudio = _openAudio;
       openAudio();
-      setState(() {
-        _isPaused = !_isPaused;
-      });
+      _isPlaying = !_isPlaying;
+      widget.currentSongData.data.isPlaying = _isPlaying;
+      widget.currentSongData.data.icon = const Icon(Icons.pause);
+
+      // debugPrint(widget.currentSongData.data.isPlaying.toString());
+      debugPrint(
+          'openAudio ${widget.currentSongData.data.openAudio.toString()}');
+    } else if (_isPlaying) {
+      _audioPlayer.pause();
+      _isPlaying = !_isPlaying;
+      widget.currentSongData.data.isPlaying = _isPlaying;
+      widget.currentSongData.data.icon = const Icon(Icons.play_arrow);
+      // debugPrint('else if ${widget.currentSongData.data.isPlaying.toString()}');
+    } else {
+      _audioPlayer.play();
+      // _isPaused = !_isPaused;
+      _isPlaying = !_isPlaying;
+      widget.currentSongData.data.isPlaying = _isPlaying;
+      widget.currentSongData.data.icon = const Icon(Icons.play_arrow);
+
+      // debugPrint('else ${widget.currentSongData.data.isPlaying.toString()}');
     }
+    notify(context);
+    setState(() {});
   }
 
   void _onSliderChanged(double value) {
-    _audioPlayer.seek(Duration(seconds: value.toInt()));
     setState(() {
+      _audioPlayer.seek(Duration(seconds: value.toInt()));
       _sliderValue = value;
     });
   }
@@ -142,7 +199,10 @@ class _AudioPlayerScreenState extends State<AudioPlayerScreen> {
         backgroundColor: transparentColor,
         leading: IconButton(
           onPressed: () {
-            Navigator.of(context).pop();
+            // Navigator.of(context).pop();
+            Navigator.of(context).push(MaterialPageRoute(
+              builder: (context) => const HomeScreen(),
+            ));
           },
           icon: const Icon(Icons.arrow_back_ios, color: Colors.white),
         ),
@@ -225,9 +285,20 @@ class _AudioPlayerScreenState extends State<AudioPlayerScreen> {
                 // need square image
                 aspectRatio: 16 / 9,
                 onPageChanged: (index, reason) {
+                  widget.currentSongData.data.artist = imagesArtistNames[index];
+                  widget.currentSongData.data.audioPath = imgPaths[index];
+                  widget.currentSongData.data.color = dycolors[index];
+                  widget.currentSongData.data.img = images[index];
+                  widget.currentSongData.data.title = imagesNames[index];
+                  widget.currentSongData.data.openAudio = true;
+                  widget.currentSongData.data.isPlaying = false;
+                  notify(context);
+
                   setState(() {
                     _current = index;
                     _audioPlayer.stop();
+                    _openAudio = true;
+                    _isPlaying = false;
                     // reset audio position
                     _sliderValue = 0.0;
                   });
@@ -246,6 +317,7 @@ class _AudioPlayerScreenState extends State<AudioPlayerScreen> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
+                      // widget.title,
                       imagesNames[_current],
                       style: const TextStyle(
                         color: Colors.white,
@@ -255,6 +327,7 @@ class _AudioPlayerScreenState extends State<AudioPlayerScreen> {
                     ),
                     SizedBox(height: height * 0.01),
                     Text(
+                      // widget.artist,
                       imagesArtistNames[_current],
                       style: const TextStyle(color: Colors.grey),
                     ),
@@ -329,12 +402,9 @@ class _AudioPlayerScreenState extends State<AudioPlayerScreen> {
                   radius: 35,
                   backgroundColor: Colors.white,
                   child: IconButton(
-                    icon: Icon(
-                      _isPaused
-                          ? Icons.pause_rounded
-                          : Icons.play_arrow_rounded,
-                      color: Colors.black,
-                    ),
+                    icon: _isPlaying
+                        ? const Icon(Icons.pause)
+                        : const Icon(Icons.play_arrow),
                     iconSize: 40,
                     onPressed: togglePlayer,
                   ),

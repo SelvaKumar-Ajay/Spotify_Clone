@@ -6,7 +6,6 @@ import 'package:spotify/data/current_song.dart';
 import 'package:spotify/data/search/cards.dart';
 import 'package:spotify/reusable_widgets/search/reusable_widgets.dart';
 import 'package:spotify/reusable_widgets/streamer_box.dart';
-import 'package:spotify/view/song_screen.dart';
 // import 'package:spotify/view/songs_list.dart';
 import '../reusable_widgets/home/reusable_widgets.dart';
 
@@ -131,13 +130,13 @@ class _SearchScreenState extends State<SearchScreen> {
                     shrinkWrap: true,
                     itemBuilder: (context, index) => GestureDetector(
                       onTap: () {
-                        Navigator.of(context).push(
-                          MaterialPageRoute(
-                            builder: (context) => AudioPlayerScreen(
-                              audioPlayer: currentSongData.data.audioPlayer,
-                            ),
-                          ),
-                        );
+                        // Navigator.of(context).push(
+                        //   MaterialPageRoute(
+                        //     builder: (context) => AudioPlayerScreen(
+                        //       audioPlayer: currentSongData.data.audioPlayer,
+                        //     ),
+                        //   ),
+                        // );
                         // player.play(AssetSource("Vaseegara.mp3"));
                       },
                       child: cards(

@@ -55,7 +55,7 @@ class StackedPlaylistTemplate extends StatelessWidget {
 class NormalPlaylistTemplate extends StatelessWidget {
   final double width;
   final double height;
-  final List<TopMixDataTemplate> yourtopMixDataList;
+  final List<IndiasTopTemplate> yourtopMixDataList;
 
   const NormalPlaylistTemplate({
     super.key,
@@ -88,7 +88,7 @@ class NormalPlaylistTemplate extends StatelessWidget {
 class NormalTitleTemplate extends StatelessWidget {
   final double width;
   final double height;
-  final List<TopMixDataTemplate> yourtopMixDataList;
+  final List<EpisForYouTemplate> yourtopMixDataList;
 
   const NormalTitleTemplate({
     super.key,
@@ -122,7 +122,7 @@ class NormalTitleTemplate extends StatelessWidget {
 class TitleOnlyTemplate extends StatelessWidget {
   final double width;
   final double height;
-  final List<TopMixDataTemplate> yourtopMixDataList;
+  final List<RecentTemplate> yourtopMixDataList;
 
   const TitleOnlyTemplate({
     super.key,

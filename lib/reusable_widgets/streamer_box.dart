@@ -71,52 +71,43 @@ class _StreamerBoxState extends State<StreamerBox> {
     });
   }
 
-  // void notify(BuildContext context) {
-  //   Provider.of<CurrentSongData>(context, listen: false).notify();
-  // }
+  void notify(BuildContext context) {
+    Provider.of<CurrentSongData>(context, listen: false).notify();
+  }
 
   void openAudio() {
     _audioPlayer.open(Audio(widget.audioPath));
   }
 
   void togglePlayer() {
-    // var currentSongData = Provider.of<CurrentSongData>(context, listen: true);
     if (_openAudio) {
       _openAudio = !_openAudio;
       widget.currentSongData.data.openAudio = _openAudio;
       openAudio();
+      _isPlaying = !_isPlaying;
+      widget.currentSongData.data.isPlaying = _isPlaying;
+      widget.currentSongData.data.icon = const Icon(Icons.pause);
 
-      setState(() {
-        _isPlaying = !_isPlaying;
-        widget.currentSongData.data.isPlaying = _isPlaying;
-        // debugPrint(widget.currentSongData.data.isPlaying.toString());
-      });
+      // debugPrint(widget.currentSongData.data.isPlaying.toString());
+      debugPrint(
+          'openAudio ${widget.currentSongData.data.openAudio.toString()}');
     } else if (_isPlaying) {
       _audioPlayer.pause();
-      setState(() {
-        // _isPaused = !_isPaused;
-        _isPlaying = !_isPlaying;
-        widget.currentSongData.data.isPlaying = _isPlaying;
-        // debugPrint(widget.currentSongData.data.isPlaying.toString());
-      });
+      _isPlaying = !_isPlaying;
+      widget.currentSongData.data.isPlaying = _isPlaying;
+      widget.currentSongData.data.icon = const Icon(Icons.play_arrow);
+      // debugPrint('else if ${widget.currentSongData.data.isPlaying.toString()}');
     } else {
       _audioPlayer.play();
-      setState(() {
-        // _isPaused = !_isPaused;
-        _isPlaying = !_isPlaying;
-        widget.currentSongData.data.isPlaying = _isPlaying;
-        // debugPrint(widget.currentSongData.data.isPlaying.toString());
-      });
+      // _isPaused = !_isPaused;
+      _isPlaying = !_isPlaying;
+      widget.currentSongData.data.isPlaying = _isPlaying;
+      widget.currentSongData.data.icon = const Icon(Icons.play_arrow);
+
+      // debugPrint('else ${widget.currentSongData.data.isPlaying.toString()}');
     }
-    // notify(context);
-    //else {
-    //   openAudio();
-    //   setState(() {
-    //     _isPaused = !_isPaused;
-    //     widget.currentSongData.data.isPaused = _isPaused;
-    //     // widget.currentSongData.data.isPlaying = _isPlaying;
-    //   });
-    // }
+    notify(context);
+    setState(() {});
   }
 
   void _onSliderChanged(double value) {
@@ -138,17 +129,32 @@ class _StreamerBoxState extends State<StreamerBox> {
     // debugPrint("Streamer Box");
     double width = MediaQuery.of(context).size.width;
     double height = MediaQuery.of(context).size.height;
-    var currentSongData = Provider.of<CurrentSongData>(context, listen: true);
+    var currentSongData = Provider.of<CurrentSongData>(context);
 
     return GestureDetector(
       onTap: () {
         Navigator.of(context).push(
           MaterialPageRoute(
             builder: (context) => AudioPlayerScreen(
+              artist: currentSongData.data.artist,
+              audioPath: currentSongData.data.audioPath,
+              boxColor: currentSongData.data.color,
+              currentSongData: currentSongData,
+              image: currentSongData.data.img,
+              isPlaying: currentSongData.data.isPlaying,
+              openAudio: currentSongData.data.openAudio,
+              title: currentSongData.data.title,
               audioPlayer: currentSongData.data.audioPlayer,
+              // songIndex: currentSongData.data.songIndex,
             ),
           ),
         );
+        //     .then((value) {
+        //   if (value == true) {
+        //     notify(context);
+        //     setState(() {});
+        //   }
+        // });
       },
       child: Column(children: [
         //Streamer box
