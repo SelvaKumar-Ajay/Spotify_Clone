@@ -40,7 +40,7 @@ class CurrentSongData with ChangeNotifier {
     'lib/musics/Arabu-Naade.mp3',
     false,
     true,
-    brownColor,
+    greyColor,
     0,
     0,
     const Icon(Icons.play_arrow),

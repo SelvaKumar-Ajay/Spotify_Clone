@@ -73,12 +73,15 @@ Container recentViewedPlaylist({
 }
 
 //Title Text
-Container titleText({
-  required text,
+Widget titleText({
+  required String text,
   required width,
 }) =>
     Container(
-      margin: EdgeInsets.fromLTRB(0, Titletext(width: width).topSpace, 0,
+      margin: EdgeInsets.fromLTRB(
+          Titletext(width: width).leftSpace,
+          Titletext(width: width).topSpace,
+          0,
           Titletext(width: width).bottomSpace),
       child: Text(
         text,

@@ -124,4 +124,5 @@ class Titletext {
   });
   late double topSpace = width * 0.06;
   late double bottomSpace = width * 0.03;
+  late double leftSpace = width * 0.02;
 }

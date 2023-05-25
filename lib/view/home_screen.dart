@@ -34,7 +34,7 @@ class _HomeScreenState extends State<HomeScreen> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                titleText(text: dateTimeGreeting(), width: width),
+                titleText(text: CurrentTime.dateTimeGreeting(), width: width),
                 rowRecentPlayList(
                   height: height,
                   width: width,
