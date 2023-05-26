@@ -1,16 +1,10 @@
-# spotify
+# spotify UI with Song Streamer
+# Song Screen
+![3](https://github.com/SelvaKumar-Ajay/Spotify_Clone/assets/99971333/9f6c87e5-fd23-4ed3-b826-d34e59b5c22f)
 
-A new Flutter project.
+# Home Screen
+![1](https://github.com/SelvaKumar-Ajay/Spotify_Clone/assets/99971333/47f1f775-ef2b-4e5a-9ef6-5ed680a39749)
 
-## Getting Started
+# Search Screen
+![2](https://github.com/SelvaKumar-Ajay/Spotify_Clone/assets/99971333/5fc1b41b-43b1-4454-9600-9f3eb57b87fb)
 
-This project is a starting point for a Flutter application.
-
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
